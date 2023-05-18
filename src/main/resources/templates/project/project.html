@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta th:replace="~{fragments/main-layout.html :: head/meta}"/>
+    <title th:replace="~{fragments/main-layout.html :: head/title}"></title>
+    <script th:src="@{/js/functionDetail.js}" defer></script>
+    <th:block th:replace="~{fragments/main-layout.html :: head/link}"/>
+    <th:block th:replace="~{fragments/main-layout.html :: head/script}"/>
+
+
+</head>
+<body>
+
+<!--fragment header-->
+<div th:replace="~{fragments/main-layout.html :: header}"></div>
+
+<!--fragment sidebar-->
+<div th:replace="~{fragments/main-layout.html :: sidebar}"></div>
+
+<!-- main content-->
+<main id="main" class="main">
+    <!--breadcrumb-->
+    <div th:replace="~{fragments/main-layout.html :: breadcrumb}"></div>
+
+    <!--content-->
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-xxl-4 col-xl-12">
+
+                <div class="card info-card customers-card coba1">
+
+                    <div class="card-body">
+                        <div class="data-profile-perusahaan">
+                            <h5 class="card-title">Daftar Project</h5>
+                            <div class="edit-delete">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#verticalycentered">
+                                    <i class="bi bi-file-plus"></i>
+                                </button>
+                                <!-- refresh button -->
+                                <button onclick="window.location.reload();" type="button" class="btn btn-primary">
+                                    <i class="bi bi-arrow-clockwise"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="q-toolbar row no-wrap items-center" role="toolbar">
+                            <form>
+                                <span>Tampilkan : </span>
+                                <input type="radio" name="status" value="semua" checked>Semua
+                                <input type="radio" name="status" value="draft">Draft
+                                <input type="radio" name="status" value="ajuan">Ajuan
+                                <input type="radio" name="status" value="disetujui">Disetujui
+                                <input type="radio" name="status" value="ditolak">Ditolak
+                                <input type="radio" name="status" value="nonaktif">Nonaktif
+                            </form>
+                        </div>
+                    </div>
+                    <!-- cara agar table tidak melewati jendela -->
+                    <div class="table-responsive">
+                        <table class="table scrolltable datatable table-project">
+                            <!-- membuat button refresh search -->
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th>Kode</th>
+                                <th>Nama Project</th>
+                                <th>Status</th>
+                                <th>Progress</th>
+                                <th>Target</th>
+                                <th>Prioritas</th>
+                                <th>Kantor</th>
+                                <th>Unit Kerja</th>
+                                <th>Project Owner</th>
+                                <th>Project Manager</th>
+                                <th>Anggota</th>
+                                <th>Bobot</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="data : ${data}">
+                                <td>
+                                    <button type="button" class="btn btn-primary detailBtn" data-bs-toggle="modal"
+                                            data-bs-target="#largeModal" href="javascript:;" th:data-id=${data.projectId}>
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button>
+
+                                    <div class="modal fade" id="largeModal" tabindex="-1">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title"><b>Ubah </b>Project</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Kode/Nomor Project</label>
+                                                        <input type="text" class="projectId" th:placeholder="${data.projectId}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="formGroupExampleInput" class="form-label">Nama Project</label>
+                                                        <input type="text" class="form-control" id="formGroupExampleInput" th:placeholder="${data.namaProject}">
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <label for="formGroupExampleInput" class="form-label">Departemen</label>
+                                                            <input type="text" class="form-control" th:placeholder="${data.namaDepartemen}" aria-label="Email 1">
+                                                        </div>
+                                                        <div class="col">
+                                                            <label for="formGroupExampleInput" class="form-label">Project Owner</label>
+                                                            <input type="text" class="form-control" th:placeholder="${data.projectOwner}" aria-label="Email 2">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <label for="formGroupExampleInput" class="form-label">Project Manager</label>
+                                                            <input type="text" class="form-control" th:placeholder="${data.projectManager}" aria-label="Email 1">
+                                                        </div>
+                                                        <div class="col">
+                                                            <label for="formGroupExampleInput" class="form-label">Kantor</label>
+                                                            <input type="text" class="form-control" th:placeholder="${data.namaKantor}" aria-label="Email 2">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <label for="formGroupExampleInput" class="form-label">Priority</label>
+                                                            <input type="text" class="form-control" th:placeholder="${data.priority}" aria-label="Email 1">
+                                                        </div>
+                                                        <div class="col">
+                                                            <label for="formGroupExampleInput" class="form-label">Bobot</label>
+                                                            <input type="text" class="form-control" th:placeholder="${data.bobot}" aria-label="Email 2">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <label for="formGroupExampleInput" class="form-label">Tanggal Mulai</label>
+                                                            <input type="date" class="form-control" th:placeholder="${data.tglMulai}" aria-label="Email 1">
+                                                        </div>
+                                                        <div class="col">
+                                                            <label for="formGroupExampleInput" class="form-label">Tanggal Selesai</label>
+                                                            <input type="date" class="form-control" th:placeholder="${data.tglSelesai}" aria-label="Email 2">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <label for="formGroupExampleInput" class="form-label">Anggota</label>
+                                                            <input type="text" class="form-control" th:placeholder="${data.anggota}" aria-label="Email 1">
+                                                        </div>
+                                                        <div class="col">
+                                                            <label for="formGroupExampleInput" class="form-label">Status</label>
+                                                            <input type="text" class="form-control" th:placeholder="${data.status}" aria-label="Email 2">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label for="exampleFormControlTextarea1">Deskripsi</label>
+                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary">SIMPAN</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#verticalycentered">
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                    </button>
+                                </td>
+                                <td th:text="${data.projectId}" ></td>
+                                <td th:text="${data.namaProject}"></td>
+                                <td><span class="badge bg-success" th:text="${data.status}"></span></td>
+                                <td>
+                                    <div class="container">
+                                        <div class="progress">
+                                            <div class="bar" th:style="'width: ' + ${data.progress}"></div>
+                                            <div class="percent" th:text="${data.progress}"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td th:text="${data.target}"></td>
+                                <td th:text="${data.priority}"></td>
+                                <td th:text="${data.namaKantor}"></td>
+                                <td th:text="${data.namaDepartemen}"></td>
+                                <td>
+                                    <div class="image-container">
+                                        <span href="#" class="bg-profile"><img th:src="@{/img/profile-img.jpg}"
+                                                                               alt="Profile" class="rounded-circle"
+                                                                               width="20px" th:text="${data.projectOwner}"></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="image-container">
+                                        <span href="#" class="bg-profile"><img th:src="@{/img/profile-img.jpg}"
+                                                                               alt="Profile" class="rounded-circle"
+                                                                               width="20px" th:text="${data.projectManager}"></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="image-container">
+                                        <a href="#" class="popup-link"><img th:src="@{/img/profile-img.jpg}"
+                                                                            alt="Profile" class="rounded-circle"
+                                                                            width="20px"></a>
+                                        <div class="popup-text" th:text="${data.anggota}"></div>
+                                    </div>
+                                </td>
+                                <td th:text="${data.bobot}"></td>
+                                <td th:text="${data.tglMulai}"></td>
+                                <td th:text="${data.tglSelesai}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    // Menambahkan event listener untuk radio button
+    var radioButtons = document.getElementsByName('status');
+    for (var i = 0; i < radioButtons.length; i++) {
+        radioButtons[i].addEventListener('change', filterData);
+    }
+
+    // Fungsi untuk memfilter data berdasarkan kategori
+    function filterData() {
+        var status = document.querySelector('input[name="status"]:checked').value;
+        var table = document.querySelector('table');
+        var rows = table.getElementsByTagName('tr');
+        for (var i = 1; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            if (status == 'semua' || cells[4].textContent.trim() == status || (status == 'ajuan' && cells[4].textContent.trim() == 'Ajuan' || (status == 'draft' && cells[4].textContent.trim() == 'Draft' || (status == 'disetujui' && cells[4].textContent.trim() == 'Disetujui' || (status == 'ditolak' && cells[4].textContent.trim() == 'Ditolak' || (status == 'nonaktif' && cells[4].textContent.trim() == 'Nonaktif')))))) {
+                rows[i].style.display = '';
+            } else {
+                rows[i].style.display = 'none';
+            }
+        }
+    }
+</script>
+
+<script>
+    const links = document.querySelectorAll('.popup-link');
+
+    links.forEach(link => {
+        link.addEventListener('mouseover', () => {
+            link.nextElementSibling.style.display = 'block';
+        });
+
+        link.addEventListener('mouseout', () => {
+            link.nextElementSibling.style.display = 'none';
+        });
+    });
+</script>
+
+</body>
+</html>

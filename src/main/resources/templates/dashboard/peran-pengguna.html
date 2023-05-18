@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta th:replace="~{fragments/main-layout.html :: head/meta}"/>
+    <title th:replace="~{fragments/main-layout.html :: head/title}"></title>
+    <th:block th:replace="~{fragments/main-layout.html :: head/link}"/>
+    <th:block th:replace="~{fragments/main-layout.html :: head/script}"/>
+
+
+</head>
+<body>
+
+<!--fragment header-->
+<div th:replace="~{fragments/main-layout.html :: header}"></div>
+
+<!--fragment sidebar-->
+<div th:replace="~{fragments/main-layout.html :: sidebar}"></div>
+
+<!--content-->
+<main id="main" class="main">
+    <!--breadcrumb-->
+    <div th:replace="~{fragments/main-layout.html :: breadcrumb}"></div>
+
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-xxl-4 col-xl-12">
+
+                <div class="card info-card customers-card coba1">
+
+
+
+                    <div class="card-body">
+                        <div class="data-profile-perusahaan">
+                            <h5 class="card-title">Daftar Peran Pengguna
+                            </h5>
+
+                            <div class="edit-delete">
+                                <span>Edit</span>
+                                <span>Hapus</span>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <table class="table datatable">
+                            <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Nama</th>
+                                <th scope="col">Email </th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td></td>
+                                <td>Brandon Jacob</td>
+                                <td>Designer</td>
+
+
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Brandon Jacob</td>
+                                <td>Designer</td>
+
+
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Brandon Jacob</td>
+                                <td>Designer</td>
+
+
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Brandon Jacob</td>
+                                <td>Designer</td>
+
+
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Brandon Jacob</td>
+                                <td>Designer</td>
+
+
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+        </div><!-- End Customers Card -->
+
+        </div>
+    </section>
+</main>
+
+
+</body>
+</html>

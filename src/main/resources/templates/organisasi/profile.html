@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta th:replace="~{fragments/main-layout.html :: head/meta}"/>
+    <title th:replace="~{fragments/main-layout.html :: head/title}"></title>
+    <th:block th:replace="~{fragments/main-layout.html :: head/link}"/>
+    <th:block th:replace="~{fragments/main-layout.html :: head/script}"/>
+
+
+</head>
+<body>
+
+<!--fragment header-->
+<div th:replace="~{fragments/main-layout.html :: header}"></div>
+
+<!--fragment sidebar-->
+<div th:replace="~{fragments/main-layout.html :: sidebar}"></div>
+
+<!-- main content-->
+<main id="main" class="main">
+    <!--breadcrumb-->
+    <div th:replace="~{fragments/main-layout.html :: breadcrumb}"></div>
+
+    <!--content-->
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-xxl-4 col-xl-12">
+
+                <div class="card info-card customers-card coba1">
+
+
+                    <div class="card-body">
+                        <div class="data-profile-perusahaan">
+                            <h5 class="card-title">Data Profil Organisasi</h5>
+
+                            <div class="edit-delete">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#largeModal">
+                                    Edit
+                                </button>
+
+                                <div class="modal fade" id="largeModal" tabindex="-1">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Ubah Organisasi</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                    <label for="namaOrganisasi" class="form-label">Nama
+                                                        Organisasi</label>
+                                                    <input type="text" class="form-control" id="namaOrganisasi"
+                                                           placeholder="Nama Organisasi">
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="formGroupExampleInput" class="form-label">Email
+                                                            1</label>
+                                                        <input type="text" class="form-control" placeholder="Email 1"
+                                                               aria-label="Email 1">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="formGroupExampleInput" class="form-label">Email
+                                                            2</label>
+                                                        <input type="text" class="form-control" placeholder="Email 2"
+                                                               aria-label="Email 2">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="formGroupExampleInput" class="form-label">Nomor
+                                                            Telepon 1</label>
+                                                        <input type="text" class="form-control"
+                                                               placeholder="Nomor Telepon 1" aria-label="Email 1">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="formGroupExampleInput" class="form-label">Nomor
+                                                            Telepon 2</label>
+                                                        <input type="text" class="form-control"
+                                                               placeholder="Nomor Telepon 2" aria-label="Email 2">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="formGroupExampleInput" class="form-label">URL</label>
+                                                    <input type="text" class="form-control" id="formGroupExampleInput"
+                                                           placeholder="URL">
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="alamat">Alamat Lengkap
+                                                            Organisasi</label>
+                                                        <textarea class="form-control" id="alamat"
+                                                                  rows="3"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="deskripsi">Deskripsi</label>
+                                                        <textarea class="form-control" id="deskripsi"
+                                                                  rows="3"></textarea>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    Close
+                                                </button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- End Large Modal-->
+                                <span>Hapus</span>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="container-profile">
+                            <div class="gambar">
+                                <img th:src="@{/img/back.c455c3a0.jpg}" alt="" width="400px" height="300px"
+                                     class="gambar-perusahaan">
+
+                            </div>
+                            <div class="keterangan-perusahaan">
+                                <div class="keterangan-perusahaan-kiri">
+                                    <Span class="text-keterangan-perusahaan">Nama</Span>
+                                    <p>PT BPD Kaltim Kaltara </p>
+                                    <Span class="text-keterangan-perusahaan">Email 1</Span>
+                                    <p>hukor@bankaltimtara.co.id
+                                    </p>
+                                    <Span class="text-keterangan-perusahaan">Email 2</Span>
+                                    <p>-
+                                    </p>
+                                    </h6>
+                                    <Span class="text-keterangan-perusahaan">Website
+                            </Span>
+                                    <p>https://bankaltimtara.co.id/
+                                    </p>
+                                    <Span class="text-keterangan-perusahaan">Alamat</Span>
+                                    <p>Gedung PT. BPD Kaltim Kaltara Lantai 3 s.d 6 Jl.
+                                        <br> Jend. Sudirman No. 33, Samarinda 75122 </p>
+                                </div>
+                                <div class="keterangan-perusahaan-kanan">
+                        <Span class="text-keterangan-perusahaan">No. Telp 1
+                        </Span>
+                                    <p>(0541) 735500
+                                    </p>
+                                    <Span class="text-keterangan-perusahaan">No. Telp 2
+                        </Span>
+                                    <p>(0541) 739562-67
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div><!-- End Customers Card -->
+
+        </div>
+    </section>
+
+</main>
+
+</body>
+</html>

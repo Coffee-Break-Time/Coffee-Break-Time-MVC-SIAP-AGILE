@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta th:replace="~{fragments/main-layout.html :: head/meta}"/>
+    <title th:replace="~{fragments/main-layout.html :: head/title}"></title>
+    <th:block th:replace="~{fragments/main-layout.html :: head/link}"/>
+    <th:block th:replace="~{fragments/main-layout.html :: head/script}"/>
+
+
+</head>
+<body>
+
+<!--fragment header-->
+<div th:replace="~{fragments/main-layout.html :: header}"></div>
+
+<!--fragment sidebar-->
+<div th:replace="~{fragments/main-layout.html :: sidebar}"></div>
+
+<!-- main content-->
+<main id="main" class="main">
+    <!--breadcrumb-->
+    <div th:replace="~{fragments/main-layout.html :: breadcrumb}"></div>
+
+    <!--content-->
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-xxl-4 col-xl-12">
+
+                <div class="card info-card customers-card coba1">
+
+                    <div class="card-body">
+                        <div class="data-profile-perusahaan">
+                            <h5 class="card-title">Ajuan Project</h5>
+                            <div class="edit-delete">
+
+                                <!-- refresh button -->
+                                <button onclick="window.location.reload();" type="button" class="btn btn-primary">
+                                    <i class="bi bi-arrow-clockwise"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="q-toolbar row no-wrap items-center" role="toolbar">
+                            <form>
+                                <span >Tampilkan : </span>
+                                <input type="radio" name="status" value="semua" checked>Semua
+                                <input type="radio" name="status" value="draft">Draft
+                                <input type="radio" name="status" value="ajuan">Ajuan
+                                <input type="radio" name="status" value="disetujui">Disetujui
+                                <input type="radio" name="status" value="ditolak">Ditolak
+                                <input type="radio" name="status" value="nonaktif">Nonaktif
+                            </form>
+                        </div>
+                    </div>
+                    <!-- cara agar table tidak melewati jendela -->
+                    <div class="table-responsive">
+                        <table class="table scrolltable newtab">
+                            <!-- membuat button refresh search -->
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Nama Project </th>
+                                <th>Yang Mengajukan</th>
+                                <th>Tanggal Pengajuan</th>
+                                <th>Status</th>
+                                <th>Yang Merespon</th>
+                                <th>Tanggal Respon</th>
+                                <th>Catatan</th>
+                            </tr>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="bi bi-layout-text-window-reverse"></div>
+                                </td>
+                                <td>Aplikasi Agile Project Management</td>
+                                <td>
+                                    <span href="#" class="bg-profile" ><img th:src="@{/image/profile-img.jpg}" alt="Profile" class="rounded-circle" width="20px"> Yoga</span>
+                                </td>
+                                <td>20/04/2023 21:00</td>
+                                <td><span class="badge bg-success">Ditolak</span></td>
+                                <td>
+                                    <span href="#" class="bg-profile" ><img th:src="@{/image/profile-img.jpg}" alt="Profile" class="rounded-circle" width="20px"> Administrator</span>
+                                </td>
+                                <td>
+                                    20/04/2023 21:00
+                                </td>
+                                <td>
+                                    <div class="chatbox">
+                                        <div class="sender-bubble">Ini pesan dari pengirim</div>
+                                        <div class="receiver-bubble">Ini pesan dari penerima</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta th:replace="~{fragments/main-layout.html :: head/meta}"/>
+    <title th:replace="~{fragments/main-layout.html :: head/title}"></title>
+    <th:block th:replace="~{fragments/main-layout.html :: head/link}"/>
+    <th:block th:replace="~{fragments/main-layout.html :: head/script}"/>
+
+
+</head>
+<body>
+
+<!--fragment header-->
+<div th:replace="~{fragments/main-layout.html :: header}"></div>
+
+<!--fragment sidebar-->
+<div th:replace="~{fragments/main-layout.html :: sidebar}"></div>
+
+<!-- main content-->
+<main id="main" class="main">
+    <!--breadcrumb-->
+    <div th:replace="~{fragments/main-layout.html :: breadcrumb}"></div>
+
+    <!--content-->
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-xxl-4 col-xl-12">
+
+                <div class="card info-card customers-card coba1">
+
+
+                    <div class="card-body">
+                        <div class="data-profile-perusahaan">
+                            <h5 class="card-title">Laporan Kendala</h5>
+
+                            <div class="edit-delete">
+                                <!-- button refresh -->
+                                <button type="button" class="btn">
+                                    <i class="bi bi-arrow-clockwise"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Nama Task</th>
+                                <th scope="col">Kendala</th>
+                                <th scope="col">Nama Project</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Development</td>
+                                <td>masih koordinasi dengan pihak jamsyar</td>
+                                <td>Jamkrindo Syariah</td>
+                            </tr>
+                            <tr>
+                                <td>Development</td>
+                                <td>masih koordinasi dengan pihak jamsyar</td>
+                                <td>Jamkrindo Syariah</td>
+                            </tr>
+                            <tr>
+                                <td>Development</td>
+                                <td>masih koordinasi dengan pihak jamsyar</td>
+                                <td>Jamkrindo Syariah</td>
+                            </tr>
+                            <tr>
+                                <td>Development</td>
+                                <td>masih koordinasi dengan pihak jamsyar</td>
+                                <td>Jamkrindo Syariah</td>
+                            </tr>
+                            <tr>
+                                <td>Development</td>
+                                <td>masih koordinasi dengan pihak jamsyar</td>
+                                <td>Jamkrindo Syariah</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div><!-- End Customers Card -->
+
+        </div>
+    </section>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta th:replace="~{fragments/main-layout.html :: head/meta}"/>
+    <title th:replace="~{fragments/main-layout.html :: head/title}"></title>
+    <th:block th:replace="~{fragments/main-layout.html :: head/link}"/>
+    <th:block th:replace="~{fragments/main-layout.html :: head/script}"/>
+
+
+</head>
+<body>
+
+<!--fragment header-->
+<div th:replace="~{fragments/main-layout.html :: header}"></div>
+
+<!--fragment sidebar-->
+<div th:replace="~{fragments/main-layout.html :: sidebar}"></div>
+
+<!-- main content-->
+<main id="main" class="main">
+    <!--breadcrumb-->
+    <div th:replace="~{fragments/main-layout.html :: breadcrumb}"></div>
+
+    <!--content-->
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-xxl-4 col-xl-12">
+
+                <div class="card info-card customers-card coba1">
+
+
+
+                    <div class="card-body">
+                        <div class="data-profile-perusahaan">
+                            <h5 class="card-title">Laporan Project</h5>
+
+                            <div class="edit-delete">
+                                <!-- button refresh -->
+                                <button type="button" class="btn">
+                                    <i class="bi bi-arrow-clockwise"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="data-profile-perusahaan">
+                            <!-- <h5 class="">Tampilkan</h5> -->
+                        </div>
+
+
+                        <table class="table datatable">
+                            <thead>
+                            <tr>
+                                <th scope="col">Kode</th>
+                                <th scope="col">Nama Project</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Progress</th>
+                                <th scope="col">Target</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Aplikasi Agile Project Management</td>
+                                <td><span class="badge bg-success">Approved</span></td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0"
+                                             aria-valuemax="100">34%</div>
+                                    </div>
+                                </td>
+                                <td>24 hari lagi</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Aplikasi Buku Kas Umum Pemprov Kaltim</td>
+                                <td><span class="badge bg-success">Approved</span></td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0"
+                                             aria-valuemax="100">34%</div>
+                                    </div>
+                                </td>
+                                <td>16 hari lagi</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Dashboard BPKAD</td>
+                                <td><span class="badge bg-success">Approved</span></td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0"
+                                             aria-valuemax="100">34%</div>
+                                    </div>
+                                </td>
+                                <td>57 hari lagi</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Digital Front Liner</td>
+                                <td><span class="badge bg-success">Approved</span></td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0"
+                                             aria-valuemax="100">34%</div>
+                                    </div>
+                                </td>
+                                <td>terlambat 37 hari</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Jamkrindo Syariah</td>
+                                <td><span class="badge bg-success">Approved</span></td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0"
+                                             aria-valuemax="100">34%</div>
+                                    </div>
+                                </td>
+                                <td>116 hari lagi</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+                </div>
+
+            </div><!-- End Customers Card -->
+
+        </div>
+    </section>
+
+</main>
+
+</body>
+</html>
