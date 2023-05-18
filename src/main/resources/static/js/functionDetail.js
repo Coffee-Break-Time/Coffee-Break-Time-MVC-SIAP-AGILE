@@ -5,7 +5,7 @@
         detailBtn[i].addEventListener("click", function (event) {
             detailBtn = event.target;
             let projectId = detailBtn.getAttribute("data-id");
-            requestSingleProduct(productId);
+            requestSingleProject(projectId);
         });
     }
 
@@ -39,16 +39,16 @@
 })();
 
 
-function requestSingleProduct(productId) {
-  let actionUrl = `http://localhost:1234/troll-market/api/product/find-by-id/${productId}`;
+function requestSingleProject(projectId) {
+  let actionUrl = `http://localhost:8080/project/find-by-id/2`;
 
   let request = new XMLHttpRequest();
   request.open("GET", actionUrl);
   request.send();
   request.onload = function () {
-    let product = JSON.parse(request.responseText);
+    let project = JSON.parse(request.responseText);
 //    console.log(product);
-    fillDetailInformation(product);
+    fillDetailInformation(project);
 
     let modalDetail = document.getElementById("modalDetail");
     modalDetail.style.display = "block";
@@ -56,24 +56,24 @@ function requestSingleProduct(productId) {
 }
 
 function fillDetailInformation({
-  productName,
-  categoryName,
-  description,
-  unitPrice,
-  sellerName,
+  namaProject
+//  categoryName,
+//  description,
+//  unitPrice,
+//  sellerName,
 }) {
-  document.querySelector(".modal-content2 .productName").textContent =
-    productName;
+  document.querySelector(".modal-body .namaProject").textContent =
+    namaProject;
 
-  document.querySelector(".modal-content2 .categoryName").textContent =
-    categoryName;
-
-  document.querySelector(".modal-content2 .description").textContent =
-    description;
-
-  document.querySelector(".modal-content2 .unitPrice").textContent =
-    unitPrice;
-
-  document.querySelector(".modal-content2 .sellerName").textContent =
-    sellerName;
+//  document.querySelector(".modal-content2 .categoryName").textContent =
+//    categoryName;
+//
+//  document.querySelector(".modal-content2 .description").textContent =
+//    description;
+//
+//  document.querySelector(".modal-content2 .unitPrice").textContent =
+//    unitPrice;
+//
+//  document.querySelector(".modal-content2 .sellerName").textContent =
+//    sellerName;
 }

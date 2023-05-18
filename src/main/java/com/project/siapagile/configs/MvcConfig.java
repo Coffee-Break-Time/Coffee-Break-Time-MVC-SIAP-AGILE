@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("forward:/dashboard/index");
+        registry.addViewController("/").setViewName("forward:/login/login");
         registry.addViewController("/dashboard").setViewName("forward:/dashboard/index");
         registry.addViewController("/organisasi").setViewName("forward:/organisasi/profile");
         registry.addViewController("/organisasi/kantor").setViewName("forward:/organisasi/profile");

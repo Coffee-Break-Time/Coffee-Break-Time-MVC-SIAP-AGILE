@@ -1,17 +1,11 @@
 package com.project.siapagile.controllers;
 
-import com.project.siapagile.dto.DaftarProjectDto;
-import com.project.siapagile.dto.DaftarProjectFinalDto;
-import com.project.siapagile.models.Project;
 import com.project.siapagile.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/project")
@@ -46,7 +40,6 @@ public class ProjectController {
         model.addAttribute("data", data);
         return "project/project";
     }
-
 
 
 }
