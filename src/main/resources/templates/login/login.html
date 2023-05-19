@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" th:href="@{/img/logo.00b5de9d.png}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIAP Agile</title>
+    <link th:href="@{/css/logincss.css}" rel="stylesheet">
+    <script th:src="@{/js/loginjs.js}" defer></script>
+</head>
+<body>
+<div class="container" id="container">
+    <div class="form-container sign-up-container">
+        <form action="#">
+            <input type="email" placeholder="Username" />
+            <input type="password" placeholder="Password" />
+            <button>Login</button>
+        </form>
+    </div>
+    <div class="form-container sign-in-container">
+        <form th:action="@{/dashboard}">
+            <input type="email" placeholder="Email" />
+            <input type="password" placeholder="Password" />
+            <button type="submit" >Sign In</button>
+        </form>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay" >
+            <div class="overlay-panel overlay-left">
+                <div class="back-judul">
+                    <h1>Selamat Datang</h1>
+                    <h2>di</h2>
+                    <h1>SIAP AGILE</h1>
+                    <br>
+                    <button class="ghost" id="signIn">Login Tanpa SSO</button>
+                </div>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <div class="back-judul">
+                    <h1>Selamat Datang</h1>
+                    <h2>di</h2>
+                    <h1>SIAP AGILE</h1>
+                    <br>
+                    <button class="ghost" id="signUp">Login Dengan SSO</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
