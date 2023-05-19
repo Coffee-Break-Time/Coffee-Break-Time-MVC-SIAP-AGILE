@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/login")
 public class LoginController {
 
-    //login controller
-
     @GetMapping("/login")
     public String timelineProject() {
         return "login/login";
