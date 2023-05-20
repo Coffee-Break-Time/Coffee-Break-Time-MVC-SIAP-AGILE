@@ -19,7 +19,15 @@
 <!-- main content-->
 <main id="main" class="main">
     <!--breadcrumb-->
-    <div th:replace="~{fragments/main-layout.html :: breadcrumb}"></div>
+    <div th:fragment="breadcrumb" class="pagetitle">
+        <nav class="d-flex justify-content-end">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Lokasi Project</a></li>
+                <li class="breadcrumb-item active">Home</li>
+            </ol>
+        </nav>
+    </div><!-- End breadcrumb-->
+</div>
 
     <!--content-->
     <section class="section dashboard">
@@ -32,7 +40,7 @@
                             <div class="edit-delete">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#verticalycentered">
-                                    Add
+                                    <i class="bi bi-plus-lg"></i>
                                 </button>
                                 <div class="modal fade" id="verticalycentered" tabindex="-1">
                                     <div class="modal-dialog modal-dialog-centered">
@@ -50,7 +58,7 @@
                                                                placeholder="Nama Kantor">
                                                     </div>
                                                     <div class="col-12">
-                                                        <label for="notelp" class="form-label">Nomor telepon
+                                                        <label for="notelp" class="form-label">Nomor Telepon
                                                         </label>
                                                         <input type="email" class="form-control" id="notelp"
                                                                placeholder="Nomor Telepon">
@@ -82,7 +90,7 @@
                                                             <label for="exampleFormControlTextarea1">Alamat</label>
                                                             <textarea class="form-control"
                                                                       id="exampleFormControlTextarea1"
-                                                                      rows="3"></textarea>
+                                                                      rows="3" placeholder="Alamat"></textarea>
                                                         </div>
                                                     </div>
                                                     <!-- <div class="text-center">
@@ -92,11 +100,16 @@
                                                 </form><!-- Vertical Form -->
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                <button type="button" class="btn btn-primary">SIMPAN</button>
                                             </div>
                                         </div>
                                     </div>
-                                </div><!-- End Vertically centered Modal--> <span>Hapus</span>
+                                </div><!-- End Vertically centered Modal-->
+                                <span>
+                                    <button onclick="window.location.reload();" type="button" class="btn btn-primary">
+                                    <i class="bi bi-arrow-clockwise"></i>
+                                </button>
+                                </span>
                             </div>
                         </div>
                         <hr>
@@ -115,7 +128,7 @@
                                 <td>
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#verticalycentered">
-                                        Edit
+                                        <i class="bi bi-pencil-square"></i>
                                     </button>
                                 </td>
                                 <td th:text="${data.namaCabang}"></td>

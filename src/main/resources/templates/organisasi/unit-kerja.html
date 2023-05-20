@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta th:replace="~{fragments/main-layout.html :: head/meta}"/>
     <title th:replace="~{fragments/main-layout.html :: head/title}"></title>
@@ -19,7 +19,15 @@
 <!-- main content-->
 <main id="main" class="main">
     <!--breadcrumb-->
-    <div th:replace="~{fragments/main-layout.html :: breadcrumb}"></div>
+    <!--breadcrumb-->
+    <div th:fragment="breadcrumb" class="pagetitle">
+        <nav class="d-flex justify-content-end">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Unit Kerja</a></li>
+                <li class="breadcrumb-item active">Home</li>
+            </ol>
+        </nav>
+    </div><!-- End breadcrumb--></div>
 
     <!--content-->
     <section class="section dashboard">
@@ -36,8 +44,9 @@
                             </h5>
 
                             <div class="edit-delete">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered">
-                                    Add
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#verticalycentered">
+                                    <i class="bi bi-plus-lg"></i>
                                 </button>
                                 <div class="modal fade" id="verticalycentered" tabindex="-1">
                                     <div class="modal-dialog modal-dialog-centered">
@@ -72,60 +81,68 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div><!-- End Vertically centered Modal-->                        <span>Hapus</span>
+                                </div><!-- End Vertically centered Modal-->
+                                <span>
+                                    <button onclick="window.location.reload();" type="button" class="btn btn-primary">
+                                    <i class="bi bi-arrow-clockwise"></i>
+                                </button>
+                                </span>
                             </div>
                         </div>
                         <hr>
                         <table class="table datatable">
                             <thead>
                             <tr>
-                                <th scope="col">Nama</th>
+                                <th scope="col"></th>
                                 <th scope="col">Nama</th>
                                 <th scope="col">Keterangan </th>
 
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered">
-                                    Edit
-                                </button></td>
-                                <td>Brandon Jacob</td>
-                                <td>Designer</td>
+                            <tr th:each="data : ${data}">
+                                <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#verticalycentered">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                                </td>
+                                <td th:text="${data.namaDepartemen}"></td>
+                                <td th:text="${data.keterangan}"></td>
 
                             </tr>
-                            <tr>
-                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered">
-                                    Edit
-                                </button></td>
-                                <td>Bridie Kessler</td>
-                                <td>Developer</td>
+<!--                            <tr>-->
+<!--                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered">-->
+<!--                                    Edit-->
+<!--                                </button></td>-->
+<!--                                <td>Bridie Kessler</td>-->
+<!--                                <td>Developer</td>-->
 
-                            </tr>
-                            <tr>
-                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered">
-                                    Edit
-                                </button></td>
-                                <td>Ashleigh Langosh</td>
-                                <td>Finance</td>
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered">-->
+<!--                                    Edit-->
+<!--                                </button></td>-->
+<!--                                <td>Ashleigh Langosh</td>-->
+<!--                                <td>Finance</td>-->
 
-                            </tr>
-                            <tr>
-                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered">
-                                    Edit
-                                </button></td>
-                                <td>Angus Grady</td>
-                                <td>HR</td>
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered">-->
+<!--                                    Edit-->
+<!--                                </button></td>-->
+<!--                                <td>Angus Grady</td>-->
+<!--                                <td>HR</td>-->
 
-                            </tr>
-                            <tr>
-                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered">
-                                    Edit
-                                </button></td>
-                                <td>Raheem Lehner</td>
-                                <td>Dynamic Division Officer</td>
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered">-->
+<!--                                    Edit-->
+<!--                                </button></td>-->
+<!--                                <td>Raheem Lehner</td>-->
+<!--                                <td>Dynamic Division Officer</td>-->
 
-                            </tr>
+<!--                            </tr>-->
                             </tbody>
                         </table>
 

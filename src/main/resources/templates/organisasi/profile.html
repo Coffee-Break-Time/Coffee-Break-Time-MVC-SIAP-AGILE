@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta th:replace="~{fragments/main-layout.html :: head/meta}"/>
     <title th:replace="~{fragments/main-layout.html :: head/title}"></title>
@@ -36,7 +36,7 @@
                             <div class="edit-delete">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#largeModal">
-                                    Edit
+                                    <i class="bi bi-pencil-square"></i>
                                 </button>
 
                                 <div class="modal fade" id="largeModal" tabindex="-1">
@@ -52,13 +52,13 @@
                                                     <label for="namaOrganisasi" class="form-label">Nama
                                                         Organisasi</label>
                                                     <input type="text" class="form-control" id="namaOrganisasi"
-                                                           placeholder="Nama Organisasi">
+                                                           placeholder="PT BPD Kaltim Kaltara">
                                                 </div>
                                                 <div class="row">
                                                     <div class="col">
                                                         <label for="formGroupExampleInput" class="form-label">Email
                                                             1</label>
-                                                        <input type="text" class="form-control" placeholder="Email 1"
+                                                        <input type="text" class="form-control" placeholder="hukor@bankaltimtara.co.id"
                                                                aria-label="Email 1">
                                                     </div>
                                                     <div class="col">
@@ -74,20 +74,20 @@
                                                         <label for="formGroupExampleInput" class="form-label">Nomor
                                                             Telepon 1</label>
                                                         <input type="text" class="form-control"
-                                                               placeholder="Nomor Telepon 1" aria-label="Email 1">
+                                                               placeholder="(0541) 735500" aria-label="Email 1">
                                                     </div>
                                                     <div class="col">
                                                         <label for="formGroupExampleInput" class="form-label">Nomor
                                                             Telepon 2</label>
                                                         <input type="text" class="form-control"
-                                                               placeholder="Nomor Telepon 2" aria-label="Email 2">
+                                                               placeholder="(0541) 739562-67" aria-label="Email 2">
                                                     </div>
                                                 </div>
 
                                                 <div class="mb-3">
                                                     <label for="formGroupExampleInput" class="form-label">URL</label>
                                                     <input type="text" class="form-control" id="formGroupExampleInput"
-                                                           placeholder="URL">
+                                                           placeholder="https://bankaltimtara.co.id/">
                                                 </div>
 
                                                 <div class="col-12">
@@ -95,7 +95,7 @@
                                                         <label for="alamat">Alamat Lengkap
                                                             Organisasi</label>
                                                         <textarea class="form-control" id="alamat"
-                                                                  rows="3"></textarea>
+                                                                  rows="3" placeholder="Gedung PT. BPD Kaltim Kaltara Lantai 3 s.d 6 Jl. Jend. Sudirman No. 33, Samarinda 75122 "></textarea>
                                                     </div>
                                                 </div>
 
@@ -103,22 +103,21 @@
                                                     <div class="form-group">
                                                         <label for="deskripsi">Deskripsi</label>
                                                         <textarea class="form-control" id="deskripsi"
-                                                                  rows="3"></textarea>
+                                                                  rows="3" placeholder="Memajukan Kalimantan Membangun Indonesia"></textarea>
                                                     </div>
                                                 </div>
 
 
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                    Close
-                                                </button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                <button type="button" class="btn btn-primary">SIMPAN</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div><!-- End Large Modal-->
-                                <span>Hapus</span>
+                                <button onclick="window.location.reload();" type="button" class="btn btn-primary">
+                                    <i class="bi bi-arrow-clockwise"></i>
+                                </button>
                             </div>
                         </div>
                         <hr>
@@ -142,8 +141,9 @@
                                     </h6>
                                     <Span class="text-keterangan-perusahaan">Website
                             </Span>
-                                    <p>https://bankaltimtara.co.id/
-                                    </p>
+                                    <a href="https://bankaltimtara.co.id/">https://bankaltimtara.co.id/
+                                    </a>
+                                    <div></div>
                                     <Span class="text-keterangan-perusahaan">Alamat</Span>
                                     <p>Gedung PT. BPD Kaltim Kaltara Lantai 3 s.d 6 Jl.
                                         <br> Jend. Sudirman No. 33, Samarinda 75122 </p>

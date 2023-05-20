@@ -1,6 +1,7 @@
 package com.project.siapagile.controllers;
 
 import com.project.siapagile.services.CabangService;
+import com.project.siapagile.services.DepartemenService;
 import com.project.siapagile.services.KantorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,9 @@ public class OrganisasiController {
 
     @Autowired
     CabangService service;
+
+    @Autowired
+    DepartemenService departemenService;
 
     @RequestMapping("/profile")
     public String index() {
@@ -27,7 +31,9 @@ public class OrganisasiController {
     }
 
     @RequestMapping("/unitkerja")
-    public String unitkerja() {
+    public String unitkerja(Model model) {
+        var data = departemenService.getDataDepartemen();
+        model.addAttribute("data" , data);
 //        return "organisasi/unitkerja";
         return "organisasi/unit-kerja";
     }
