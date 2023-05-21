@@ -19,7 +19,7 @@
 <!-- main content-->
 <main id="main" class="main">
     <!--breadcrumb-->
-    <div th:replace="~{fragments/main-layout.html :: breadcrumb}"></div>
+    <div th:replace="~{fragments/main-layout.html :: breadcrumb (${title})}"></div>
 
     <!--content-->
     <section class="section dashboard">
@@ -35,86 +35,15 @@
 
                             <div class="edit-delete">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#largeModal">
+                                        data-bs-target="#modalProfile">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
 
-                                <div class="modal fade" id="largeModal" tabindex="-1">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Ubah Organisasi</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="mb-3">
-                                                    <label for="namaOrganisasi" class="form-label">Nama
-                                                        Organisasi</label>
-                                                    <input type="text" class="form-control" id="namaOrganisasi"
-                                                           placeholder="PT BPD Kaltim Kaltara">
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label for="formGroupExampleInput" class="form-label">Email
-                                                            1</label>
-                                                        <input type="text" class="form-control" placeholder="hukor@bankaltimtara.co.id"
-                                                               aria-label="Email 1">
-                                                    </div>
-                                                    <div class="col">
-                                                        <label for="formGroupExampleInput" class="form-label">Email
-                                                            2</label>
-                                                        <input type="text" class="form-control" placeholder="Email 2"
-                                                               aria-label="Email 2">
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label for="formGroupExampleInput" class="form-label">Nomor
-                                                            Telepon 1</label>
-                                                        <input type="text" class="form-control"
-                                                               placeholder="(0541) 735500" aria-label="Email 1">
-                                                    </div>
-                                                    <div class="col">
-                                                        <label for="formGroupExampleInput" class="form-label">Nomor
-                                                            Telepon 2</label>
-                                                        <input type="text" class="form-control"
-                                                               placeholder="(0541) 739562-67" aria-label="Email 2">
-                                                    </div>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="formGroupExampleInput" class="form-label">URL</label>
-                                                    <input type="text" class="form-control" id="formGroupExampleInput"
-                                                           placeholder="https://bankaltimtara.co.id/">
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="alamat">Alamat Lengkap
-                                                            Organisasi</label>
-                                                        <textarea class="form-control" id="alamat"
-                                                                  rows="3" placeholder="Gedung PT. BPD Kaltim Kaltara Lantai 3 s.d 6 Jl. Jend. Sudirman No. 33, Samarinda 75122 "></textarea>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="deskripsi">Deskripsi</label>
-                                                        <textarea class="form-control" id="deskripsi"
-                                                                  rows="3" placeholder="Memajukan Kalimantan Membangun Indonesia"></textarea>
-                                                    </div>
-                                                </div>
+                                <!--modal-->
+                                <div th:replace="~{${modal} :: modal }"></div>
+                                <!-- End Large Modal-->
 
 
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary">SIMPAN</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!-- End Large Modal-->
                                 <button onclick="window.location.reload();" type="button" class="btn btn-primary">
                                     <i class="bi bi-arrow-clockwise"></i>
                                 </button>
@@ -122,7 +51,7 @@
                         </div>
                         <hr>
 
-                        <div class="container-profile">
+                        <div class="container-profile" th:object="${data}">
                             <div class="gambar">
                                 <img th:src="@{/img/back.c455c3a0.jpg}" alt="" width="400px" height="300px"
                                      class="gambar-perusahaan">
@@ -130,40 +59,28 @@
                             </div>
                             <div class="keterangan-perusahaan">
                                 <div class="keterangan-perusahaan-kiri">
-                                    <Span class="text-keterangan-perusahaan">Nama</Span>
-                                    <p>PT BPD Kaltim Kaltara </p>
-                                    <Span class="text-keterangan-perusahaan">Email 1</Span>
-                                    <p>hukor@bankaltimtara.co.id
-                                    </p>
-                                    <Span class="text-keterangan-perusahaan">Email 2</Span>
-                                    <p>-
-                                    </p>
-                                    </h6>
-                                    <Span class="text-keterangan-perusahaan">Website
-                            </Span>
-                                    <a href="https://bankaltimtara.co.id/">https://bankaltimtara.co.id/
-                                    </a>
+                                    <span class="text-keterangan-perusahaan">Nama</span>
+                                    <h6 th:text="*{namaOrganisasi == null ? '-' : namaOrganisasi}"></h6>
+                                    <!--                                    <p>PT BPD Kaltim Kaltara </p>-->
+                                    <span class="text-keterangan-perusahaan">Email 1</span>
+                                    <p th:text="*{email1 == null ? '-' : email1}"></p>
+                                    <span class="text-keterangan-perusahaan">Email 2</span>
+                                    <p th:text="*{email2 == null ? '-' : email2}"></p>
+                                    <span class="text-keterangan-perusahaan">Website</span>
+                                    <p><a th:href="*{url == null ? '-' : url}" target="_blank"
+                                          th:text="*{url == null ? '-' : url}"></a></p>
                                     <div></div>
-                                    <Span class="text-keterangan-perusahaan">Alamat</Span>
-                                    <p>Gedung PT. BPD Kaltim Kaltara Lantai 3 s.d 6 Jl.
-                                        <br> Jend. Sudirman No. 33, Samarinda 75122 </p>
+                                    <span class="text-keterangan-perusahaan">Alamat</span>
+                                    <p th:text="*{alamatLengkap == null ? '-' : alamatLengkap}"></p>
                                 </div>
                                 <div class="keterangan-perusahaan-kanan">
-                        <Span class="text-keterangan-perusahaan">No. Telp 1
-                        </Span>
-                                    <p>(0541) 735500
-                                    </p>
-                                    <Span class="text-keterangan-perusahaan">No. Telp 2
-                        </Span>
-                                    <p>(0541) 739562-67
-                                    </p>
+                                    <span class="text-keterangan-perusahaan">No. Telp 1</span>
+                                    <p th:text="*{noTlp1 == null ? '-' : noTlp1}"></p>
+                                    <span class="text-keterangan-perusahaan">No. Telp 2</span>
+                                    <p th:text="*{noTlp2 == null ? '-' : noTlp2}"></p>
                                 </div>
-
                             </div>
-
-
                         </div>
-
 
                     </div>
                 </div>

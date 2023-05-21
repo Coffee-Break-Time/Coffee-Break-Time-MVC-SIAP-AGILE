@@ -19,7 +19,7 @@
 <!--content-->
 <main id="main" class="main">
     <!--breadcrumb-->
-    <div th:replace="~{fragments/main-layout.html :: breadcrumb}"></div>
+    <div th:replace="~{fragments/main-layout.html :: breadcrumb (${title})}"></div>
 
     <section class="section dashboard">
         <div class="row">

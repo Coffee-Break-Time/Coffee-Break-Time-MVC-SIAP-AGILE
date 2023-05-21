@@ -256,7 +256,7 @@
 </aside><!-- End Sidebar-->
 
 <!--breadcrumb-->
-<div th:fragment="breadcrumb" class="pagetitle">
+<div th:fragment="breadcrumb (title != null ? title : 'Dashboard')">
     <nav class="d-flex justify-content-end">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Profil Organisasi</a></li>

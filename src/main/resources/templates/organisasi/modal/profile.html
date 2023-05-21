@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- Modal -->
+<div class="modal fade" id="modalProfile" tabindex="-1" th:fragment="modal">
+    <div class="modal-dialog modal-lg">
+        <form class="modal-content" id="formProfile" th:object="${data}" th:action="@{/organisasi/profile/save}"
+              method="post">
+            <input type="hidden" th:field="*{id}">
+            <div class="modal-header">
+                <h5 class="modal-title">Ubah Organisasi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="namaOrganisasi" class="form-label">Nama Organisasi</label>
+                    <input type="text" class="form-control" id="namaOrganisasi" name="namaOrganisasi"
+                           placeholder="PT BPD Kaltim Kaltara" th:field="*{namaOrganisasi}">
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="email1" class="form-label">Email
+                            1</label>
+                        <input type="text" class="form-control" placeholder="hukor@bankaltimtara.co.id"
+                               aria-label="Email 1" id="email1" name="email1" th:field="*{email1}">
+                    </div>
+                    <div class="col">
+                        <label for="email2" class="form-label">Email
+                            2</label>
+                        <input type="text" class="form-control" placeholder="Email 2"
+                               aria-label="Email 2" id="email2" name="email2" th:field="*{email2}">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label for="noTlp1" class="form-label">Nomor
+                            Telepon 1</label>
+                        <input type="text" class="form-control"
+                               placeholder="(0541) 735500" aria-label="noTlp1" id="noTlp1" name="noTlp1"
+                               th:field="*{noTlp1}">
+                    </div>
+                    <div class="col">
+                        <label for="noTlp2" class="form-label">Nomor
+                            Telepon 2</label>
+                        <input type="text" class="form-control"
+                               placeholder="(0541) 739562-67" aria-label="noTlp2" id="noTlp2" name="noTlp2"
+                               th:field="*{noTlp2}">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="url" class="form-label">URL</label>
+                    <input type="text" class="form-control"
+                           placeholder="https://bankaltimtara.co.id/" aria-label="URL" id="url" name="url"
+                           th:field="*{url}">
+                </div>
+
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="alamatLengkap">Alamat Lengkap
+                            Organisasi</label>
+                        <textarea class="form-control" id="alamatLengkap" name="alamatLengkap"
+                                  rows="3"
+                                  placeholder="Gedung PT. BPD Kaltim Kaltara Lantai 3 s.d 6 Jl. Jend. Sudirman No. 33, Samarinda 75122 "
+                                  th:field="*{alamatLengkap}"
+                        ></textarea>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="deskripsi">Deskripsi</label>
+                        <textarea class="form-control" id="deskripsi" name="deskripsi"
+                                  rows="3" placeholder="Memajukan Kalimantan Membangun Indonesia"
+                                    th:field="*{deskripsi}"
+                        ></textarea>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="saveEditButton" class="btn btn-primary">SIMPAN</button>
+            </div>
+        </form>
+    </div>
+</div><!-- End Large Modal-->
+<!--End Modal-->
+</body>
+</html>

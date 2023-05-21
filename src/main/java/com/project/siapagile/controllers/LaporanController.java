@@ -1,6 +1,7 @@
 package com.project.siapagile.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -9,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LaporanController {
 
     @GetMapping("/timeline-project")
-    public String timelineProject() {
+    public String timelineProject(Model model) {
+        model.addAttribute("title", "Timeline Project");
         return "laporan/timeline-project-task";
     }
 
