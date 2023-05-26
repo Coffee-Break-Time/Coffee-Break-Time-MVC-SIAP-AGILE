@@ -43,7 +43,6 @@
                                     <i class="bi bi-plus-lg"></i>
                                 </button>
 
-                                <div th:replace="~{${modal} :: modal }"></div>
 
                                 <span>
                                     <button onclick="window.location.reload();" type="button" class="btn btn-primary">
@@ -66,10 +65,11 @@
                             <tbody>
                             <tr th:each="data : ${data}">
                                 <td>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    <a th:href="@{/organisasi/upsert-form(id = ${data.cabangId})}" >Edit</a>
+                                    <!--<button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#verticalycentered">
                                         <i class="bi bi-pencil-square"></i>
-                                    </button>
+                                    </button>-->
                                 </td>
                                 <td th:text="${data.namaCabang}"></td>
                                 <td th:text="${data.nomorTelpCabang}"></td>

@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta th:replace="~{fragments/main-layout.html :: head/meta}"/>
+    <title th:replace="~{fragments/main-layout.html :: head/title}"></title>
+    <th:block th:replace="~{fragments/main-layout.html :: head/link}"/>
+    <th:block th:replace="~{fragments/main-layout.html :: head/script}"/>
+
+
 </head>
 <body>
 
@@ -12,22 +16,25 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Kantor Baru</h5>
+        <h5 class="modal-title">Edit Kantor</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"
                 aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form class="row g-3">
+        <form class="row g-3"  th:object="${cabana}">
           <div class="col-12">
-            <label for="namaKantor" class="form-label">Nama Kantor</label>
-            <input type="text" class="form-control" id="namaKantor"
-                   placeholder="Nama Kantor">
+              <input type="hidden" th:field="${cabana.cabangId}">
+
+              <!--            <input type="hidden" th:field="${cabana.cabangId}" >-->
+            <label  class="form-label">Nama Kantor</label>
+            <input type="text" name="title" th:field="${cabana.namaCabang}"  class="form-control" >
+
           </div>
           <div class="col-12">
             <label for="notelp" class="form-label">Nomor Telepon
             </label>
             <input type="email" class="form-control" id="notelp"
-                   placeholder="Nomor Telepon">
+                   th:field="${cabana.nomorTelpCabang}">
 
           </div>
           <div class="col-12">

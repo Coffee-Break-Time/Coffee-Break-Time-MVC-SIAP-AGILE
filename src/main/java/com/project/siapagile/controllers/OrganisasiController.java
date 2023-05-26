@@ -1,7 +1,8 @@
 package com.project.siapagile.controllers;
 
+import com.project.siapagile.dto.CabangDTO;
 import com.project.siapagile.dto.organisasi.OrganisasiDto;
-import com.project.siapagile.models.Cabang;
+import com.project.siapagile.serviceImpl.CabangServiceImpl;
 import com.project.siapagile.services.CabangService;
 import com.project.siapagile.services.DepartemenService;
 import com.project.siapagile.services.OrganisasiService;
@@ -43,44 +44,43 @@ public class OrganisasiController {
         return "redirect:/organisasi";
     }
 
+    @PostMapping("kantor/save")
+    public Object saveKantor(@Valid @ModelAttribute CabangDTO cabangDTO,BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return "redirect:/kantor";
+
+        }
+        service.saveData(cabangDTO);
+        return "redirect:/organisasi";
+
+    }
+
     @RequestMapping("/kantor")
     public String kantor(Model model) {
         var data = service.getDataCabang();
         model.addAttribute("data" , data);
+        model.addAttribute("modal" , "organisasi/modal/kantor");
+        model.addAttribute("cabana", service.getKantorById(1));
+        System.out.println(service.getKantorById(1));
+
         return "organisasi/kantor";
     }
 
-    @PostMapping("/kantor/save")
-    public Object save(@ModelAttribute Cabang dto,
-                       BindingResult br) {
-        if (br.hasErrors()) {
-            return "redirect:/organisasi/kantor";
-        }
-        service.saveDataCabang(dto);
-        return "redirect:/organisasi/kantor";
-    }
-
     @GetMapping("upsert-form")
-    public String save(@RequestParam (required = false) Integer cabangId, Model model){
-        if (cabangId != null) {
-            model.addAttribute("cabang", organisasiService.getCabangById(cabangId));
-            model.addAttribute("breadCrumbs", "ORGANISASI / KANTOR / UPDATE");
+    public String upsertForm(@RequestParam(required = false) Integer id, Model model) {
+        if (id != null) {
+            model.addAttribute("cabana", service.getKantorById(id));
+            model.addAttribute("modal" , "organisasi/modal/kantor");
+
+//            model.addAttribute("breadCrumbs", "Category / Update");
         } else {
-            model.addAttribute("cabang", new Cabang());
-            model.addAttribute("breadCrumbs", "ORGANISASI / KANTOR / INDEX");
+            model.addAttribute("category", new CabangDTO());
+//            model.addAttribute("breadCrumbs", "Category / Insert");
         }
-        return "organisasi/modal/kantor";
+        return "organisasi/kantor";
     }
 
-    @PostMapping("upsert")
-    public String saveData(@Valid @ModelAttribute Cabang dto,
-                       BindingResult br) {
-        if (br.hasErrors()) {
-            return "redirect:/organisasi/kantor";
-        }
-        organisasiService.saveCabang(dto);
-        return "redirect:/organisasi/kantor";
-    }
+
 
     @RequestMapping("/unitkerja")
     public String unitkerja(Model model) {
