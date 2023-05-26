@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -62,9 +60,27 @@ public class OrganisasiController {
         var data = service.getDataCabang();
         model.addAttribute("data" , data);
         model.addAttribute("modal" , "organisasi/modal/kantor");
+        model.addAttribute("cabana", service.getKantorById(1));
+        System.out.println(service.getKantorById(1));
 
         return "organisasi/kantor";
     }
+
+    @GetMapping("upsert-form")
+    public String upsertForm(@RequestParam(required = false) Integer id, Model model) {
+        if (id != null) {
+            model.addAttribute("cabana", service.getKantorById(id));
+            model.addAttribute("modal" , "organisasi/modal/kantor");
+
+//            model.addAttribute("breadCrumbs", "Category / Update");
+        } else {
+            model.addAttribute("category", new CabangDTO());
+//            model.addAttribute("breadCrumbs", "Category / Insert");
+        }
+        return "organisasi/kantor";
+    }
+
+
 
     @RequestMapping("/unitkerja")
     public String unitkerja(Model model) {
