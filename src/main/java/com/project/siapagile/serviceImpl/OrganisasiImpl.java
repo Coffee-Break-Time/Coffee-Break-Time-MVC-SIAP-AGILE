@@ -1,7 +1,9 @@
 package com.project.siapagile.serviceImpl;
 
 import com.project.siapagile.dto.organisasi.OrganisasiDto;
+import com.project.siapagile.models.Cabang;
 import com.project.siapagile.models.Organisasi;
+import com.project.siapagile.repositories.CabangRepository;
 import com.project.siapagile.repositories.OrganisasiRepository;
 import com.project.siapagile.services.OrganisasiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,9 @@ public class OrganisasiImpl implements OrganisasiService {
 
     @Autowired
     OrganisasiRepository organisasiRepository;
+
+    @Autowired
+    CabangRepository cabangRepository;
 
     @Override
     public Organisasi getData() {
@@ -37,5 +42,30 @@ public class OrganisasiImpl implements OrganisasiService {
         );
 
         return organisasiRepository.save(data);
+    }
+
+    @Override
+    public void saveCabang(@Valid Cabang cabangInput) {
+        Cabang cabang = new Cabang(
+                cabangInput.getCabangId(),
+                cabangInput.getNamaCabang(),
+                cabangInput.getNomorTelpCabang(),
+                cabangInput.getJenisKantor(),
+                cabangInput.getAlamat()
+        );
+        cabangRepository.save(cabang);
+    }
+
+    @Override
+    public Cabang getCabangById(Integer cabangId) {
+        Cabang cabang = cabangRepository.findById(cabangId)
+                .orElseThrow(()-> new RuntimeException("Cabang tidak ditemukan"));
+        return new Cabang(
+                cabang.getCabangId(),
+                cabang.getNamaCabang(),
+                cabang.getNomorTelpCabang(),
+                cabang.getJenisKantor(),
+                cabang.getAlamat()
+        );
     }
 }

@@ -19,6 +19,10 @@ public class CabangService {
         return data;
     }
 
+    public Cabang saveDataCabang(Cabang cabang){
+        return cabangRepository.save(cabang);
+    }
+
 
 
 }
