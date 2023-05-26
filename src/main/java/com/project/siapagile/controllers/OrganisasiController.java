@@ -1,6 +1,8 @@
 package com.project.siapagile.controllers;
 
+import com.project.siapagile.dto.CabangDTO;
 import com.project.siapagile.dto.organisasi.OrganisasiDto;
+import com.project.siapagile.serviceImpl.CabangServiceImpl;
 import com.project.siapagile.services.CabangService;
 import com.project.siapagile.services.DepartemenService;
 import com.project.siapagile.services.OrganisasiService;
@@ -44,10 +46,23 @@ public class OrganisasiController {
         return "redirect:/organisasi";
     }
 
+    @PostMapping("kantor/save")
+    public Object saveKantor(@Valid @ModelAttribute CabangDTO cabangDTO,BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return "redirect:/kantor";
+
+        }
+        service.saveData(cabangDTO);
+        return "redirect:/organisasi";
+
+    }
+
     @RequestMapping("/kantor")
     public String kantor(Model model) {
         var data = service.getDataCabang();
         model.addAttribute("data" , data);
+        model.addAttribute("modal" , "organisasi/modal/kantor");
+
         return "organisasi/kantor";
     }
 
