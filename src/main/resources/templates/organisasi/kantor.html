@@ -5,6 +5,9 @@
     <title th:replace="~{fragments/main-layout.html :: head/title}"></title>
     <th:block th:replace="~{fragments/main-layout.html :: head/link}"/>
     <th:block th:replace="~{fragments/main-layout.html :: head/script}"/>
+    <!--    panggil js getDataKantor.js-->
+    <script th:src="@{/vendor/apexcharts/apexcharts.min.js}" defer></script>
+    <script type="text/javascript" th:src="@{/js/getData/getDataKantor.js}" defer></script>
 
 
 </head>
@@ -27,7 +30,7 @@
             </ol>
         </nav>
     </div><!-- End breadcrumb-->
-</div>
+    </div>
 
     <!--content-->
     <section class="section dashboard">
@@ -39,10 +42,11 @@
                             <h5 class="card-title">Daftar Kantor</h5>
                             <div class="edit-delete">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#verticalycentered">
+                                        data-bs-target="#modalKantor">
                                     <i class="bi bi-plus-lg"></i>
                                 </button>
 
+                                <div th:replace="~{${modal} :: modal }"></div>
 
                                 <span>
                                     <button onclick="window.location.reload();" type="button" class="btn btn-primary">
@@ -52,7 +56,7 @@
                             </div>
                         </div>
                         <hr>
-                        <table class="table datatable">
+                        <table class="table datatable" id="tableKantor">
                             <thead>
                             <tr>
                                 <th scope="col"></th>
@@ -65,73 +69,23 @@
                             <tbody>
                             <tr th:each="data : ${data}">
                                 <td>
-                                    <a th:href="@{/organisasi/upsert-form(id = ${data.cabangId})}" >Edit</a>
-                                    <!--<button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#verticalycentered">
+                                    <a type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                       data-bs-target="#modalKantor"
+                                       th:data-id=${data.cabangId}
+                                       href="javascript:"
+                                       id="buttonEdit"
+                                    >
                                         <i class="bi bi-pencil-square"></i>
-                                    </button>-->
+                                    </a>
                                 </td>
                                 <td th:text="${data.namaCabang}"></td>
                                 <td th:text="${data.nomorTelpCabang}"></td>
                                 <td th:text="${data.jenisKantor}"></td>
                                 <td th:text="${data.alamat}"></td>
-
-
-
-
-                                <!--  <td>Designer</td>
-                                  <td>28</td>
-                                  <td>2016-05-25</td>-->
                             </tr>
-                          <!--  <tr>
-                                <td>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#verticalycentered">
-                                        Edit
-                                    </button>
-                                </td>
-                                <td>Bridie Kessler</td>
-                                <td>Developer</td>
-                                <td>35</td>
-                                <td>2014-12-05</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#verticalycentered">
-                                        Edit
-                                    </button>
-                                </td>
-                                <td>Ashleigh Langosh</td>
-                                <td>Finance</td>
-                                <td>45</td>
-                                <td>2011-08-12</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#verticalycentered">
-                                        Edit
-                                    </button>
-                                </td>
-                                <td>Angus Grady</td>
-                                <td>HR</td>
-                                <td>34</td>
-                                <td>2012-06-11</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#verticalycentered">
-                                        Edit
-                                    </button>
-                                </td>
-                                <td>Raheem Lehner</td>
-                                <td>Dynamic Division Officer</td>
-                                <td>47</td>
-                                <td>2011-04-19</td>
-                            </tr>-->
+
                             </tbody>
+                            <script type="text/javascript" th:src="@{/js/getData/getDataKantor.js}"></script>
                         </table>
                     </div>
                 </div>

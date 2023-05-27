@@ -1,6 +1,7 @@
 package com.project.siapagile.services;
 
 
+import com.project.siapagile.dto.CabangDTO;
 import com.project.siapagile.models.Cabang;
 import com.project.siapagile.repositories.CabangRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,18 @@ public class CabangService {
         return data;
     }
 
+    public Cabang getDataCabangById (Integer id){
+        return cabangRepository.findById(id).get();
+    }
 
 
+    public void saveData(CabangDTO cabangDTO) {
+        var cabang = new Cabang();
+        cabang.setCabangId(cabangDTO.getCabangId());
+        cabang.setNamaCabang(cabangDTO.getNamaCabang());
+        cabang.setNomorTelpCabang(cabangDTO.getNomorTelpCabang());
+        cabang.setJenisKantor(cabangDTO.getJenisKantor());
+        cabang.setAlamat(cabangDTO.getAlamat());
+        cabangRepository.save(cabang);
+    }
 }

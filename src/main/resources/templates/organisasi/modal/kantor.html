@@ -1,79 +1,79 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta th:replace="~{fragments/main-layout.html :: head/meta}"/>
-    <title th:replace="~{fragments/main-layout.html :: head/title}"></title>
-    <th:block th:replace="~{fragments/main-layout.html :: head/link}"/>
-    <th:block th:replace="~{fragments/main-layout.html :: head/script}"/>
-
-
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
 
 
 <!--Modal-->
-<div class="modal fade" id="verticalycentered" tabindex="-1" th:fragment="modal">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Edit Kantor</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form class="row g-3"  th:object="${cabana}">
-          <div class="col-12">
-              <input type="hidden" th:field="${cabana.cabangId}">
+<div class="modal fade" id="modalKantor" tabindex="-1" th:fragment="modal"
+     aria-labelledby="modalKantorLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form id="formUpsertKantor" th:action="@{/organisasi/profile/upsert}" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title">Kantor Baru</h5>
+                    <button type="button" class="btn-close" id="btnClose" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3">
+                        <input type="text" id="cabangId" name="cabangId"/>
+                        <div class="col-12">
+                            <label for="namaCabang" class="form-label">Nama Kantor</label>
+                            <input type="text" class="form-control" id="namaCabang" name="namaCabang"
+                                   placeholder="Nama Kantor">
+                        </div>
+                        <div class="col-12">
+                            <label for="nomorTelpCabang" class="form-label">Nomor Telepon
+                            </label>
+                            <input type="text" class="form-control" id="nomorTelpCabang" name="nomorTelpCabang"
+                                   placeholder="Nomor Telepon">
 
-              <!--            <input type="hidden" th:field="${cabana.cabangId}" >-->
-            <label  class="form-label">Nama Kantor</label>
-            <input type="text" name="title" th:field="${cabana.namaCabang}"  class="form-control" >
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Jenis Kantor</label>
 
-          </div>
-          <div class="col-12">
-            <label for="notelp" class="form-label">Nomor Telepon
-            </label>
-            <input type="email" class="form-control" id="notelp"
-                   th:field="${cabana.nomorTelpCabang}">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio"
+                                       name="jenisKantor"
+                                       value="Syariah"
+                                       id="syariah">
+                                <label class="form-check-label" for="syariah">
+                                    Syariah
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio"
+                                       name="jenisKantor"
+                                       value="Konven"
+                                       id="konven" checked>
+                                <label class="form-check-label" for="konven">
+                                    Konven
+                                </label>
+                            </div>
 
-          </div>
-          <div class="col-12">
-            <label class="form-label">Jenis Kantor</label>
 
-            <div class="form-check">
-              <input class="form-check-input" type="radio"
-                     name="flexRadioDefault"
-                     id="flexRadioDefault1">
-              <label class="form-check-label" for="flexRadioDefault1">
-                Syariah
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio"
-                     name="flexRadioDefault"
-                     id="flexRadioDefault2" checked>
-              <label class="form-check-label" for="flexRadioDefault2">
-                Konven
-              </label>
-            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="alamat">Alamat</label>
+                                <textarea class="form-control"
+                                          id="alamat" name="alamat"
+                                          rows="3" placeholder="Alamat"></textarea>
+                            </div>
+                        </div>
 
-          </div>
-          <div class="col-12">
-            <div class="form-group">
-              <label for="exampleFormControlTextarea1">Alamat</label>
-              <textarea class="form-control"
-                        id="exampleFormControlTextarea1"
-                        rows="3" placeholder="Alamat"></textarea>
-            </div>
-          </div>
-
-        </form><!-- Vertical Form -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">SIMPAN</button>
-      </div>
+                    </form><!-- Vertical Form -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnSave" class="btn btn-primary">SIMPAN</button>
+                </div>
+            </form>
+        </div>
     </div>
-  </div>
 </div><!-- End Vertically centered Modal-->
 <!--Modal end-->
 </body>
