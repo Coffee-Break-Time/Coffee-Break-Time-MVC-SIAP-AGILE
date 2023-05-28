@@ -27,11 +27,21 @@ public class CabangService {
 
     public void saveData(CabangDTO cabangDTO) {
         var cabang = new Cabang();
-        cabang.setCabangId(cabangDTO.getCabangId());
+        if (cabangDTO.getCabangId() != null) {
+            cabang.setCabangId(cabangDTO.getCabangId());
+        } else {
+            System.out.println("cabang id : " + cabangRepository.findMaxCabangId());
+            cabang.setCabangId(cabangRepository.findMaxCabangId() + 1);
+        }
+//        cabang.setCabangId(cabangDTO.getCabangId());
         cabang.setNamaCabang(cabangDTO.getNamaCabang());
         cabang.setNomorTelpCabang(cabangDTO.getNomorTelpCabang());
         cabang.setJenisKantor(cabangDTO.getJenisKantor());
         cabang.setAlamat(cabangDTO.getAlamat());
         cabangRepository.save(cabang);
+    }
+
+    public void deleteData(Integer id) {
+        cabangRepository.deleteById(id);
     }
 }

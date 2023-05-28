@@ -12,7 +12,7 @@
      aria-labelledby="modalKantorLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <form id="formUpsertKantor" th:action="@{/organisasi/profile/upsert}" method="post">
+            <form id="formUpsertKantor" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title">Kantor Baru</h5>
                     <button type="button" class="btn-close" id="btnClose" data-bs-dismiss="modal"
@@ -20,7 +20,7 @@
                 </div>
                 <div class="modal-body">
                     <form class="row g-3">
-                        <input type="text" id="cabangId" name="cabangId"/>
+                        <input type="hidden" id="cabangId" name="cabangId"/>
                         <div class="col-12">
                             <label for="namaCabang" class="form-label">Nama Kantor</label>
                             <input type="text" class="form-control" id="namaCabang" name="namaCabang"
