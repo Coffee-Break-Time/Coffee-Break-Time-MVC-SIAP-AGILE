@@ -10,7 +10,7 @@
             let id = this.getAttribute('data-id');
             console.log(id);
             // call function getDataKantor
-            getDataKantor(id);
+            getDataUnitKerja(id);
         });
     });
 
@@ -28,9 +28,9 @@
         saveDataKantor();
     });
 
-    let modalKantor = document.querySelector('#modalKantor');
+    let modalUnitKerja = document.querySelector('#modalUnitKerja');
         //jika modalKantor hidden maka akan direset value
-        modalKantor.addEventListener('hidden.bs.modal', function () {
+        modalUnitKerja.addEventListener('hidden.bs.modal', function () {
             resetValues();
         });
 
@@ -40,28 +40,28 @@
 //ajax get data Cabang from controller kantor/{id}
 // dimana data cabang akan diterima sebagai th:object di form edit kantor
 
-function getDataKantor(id) {
+function getDataUnitKerja(id) {
 
 //     get data cabang
-    $.get(`http://localhost:8080/organisasi/kantor/${id}`).then(function (data) {
+    $.get(`http://localhost:8080/organisasi/unit-kerja/${id}`).then(function (data) {
         console.log(data);
-        $('#cabangId').val(data.cabangId);
-        $('#namaCabang').val(data.namaCabang);
-        $('#nomorTelpCabang').val(data.nomorTelpCabang);
-        $('#alamat').val(data.alamat);
-        if (data.jenisKantor == 'Konven') {
-            $('#konven').prop('checked', true);
-        } else if (data.jenisKantor == 'Syariah') {
-            $('#syariah').prop('checked', true);
-        }
-        $('#modalKantor').modal('show');
+        $('#departemenId').val(data.departemenId);
+        $('#namaDepartemen').val(data.namaDepartemen);
+        $('#keterangan').val(data.keterangan);
+//        $('#alamat').val(data.alamat);
+//        if (data.jenisKantor == 'Konven') {
+//            $('#konven').prop('checked', true);
+//        } else if (data.jenisKantor == 'Syariah') {
+//            $('#syariah').prop('checked', true);
+//        }
+//        $('#modalKantor').modal('show');
     });
 
 }
 
 function saveDataKantor() {
-    let form = $('#formUpsertKantor');
-    let url = 'http://localhost:8080/organisasi/kantor/upsert'
+    let form = $('#formUpsertUnitKerja');
+    let url = 'http://localhost:8080/organisasi/unit-kerja/upsert'
     let method = form.attr('method');
     let data = form.serialize();
 
@@ -75,7 +75,7 @@ function saveDataKantor() {
         success: function (response) {
             // resetValidation();
             resetValues();
-            $('#modalKantor').modal('hide');
+            $('#modalUnitKerja').modal('hide');
             reloadTable();
         },
         error: function (response) {
@@ -91,12 +91,9 @@ function saveDataKantor() {
 }
 
 function resetValues() {
-    $('#cabangId').val('');
-    $('#namaCabang').val('');
-    $('#nomorTelpCabang').val('');
-    $('#alamat').val('');
-    $('#konven').prop('checked', false);
-    $('#syariah').prop('checked', false);
+            $('#departemenId').val('');
+            $('#namaDepartemen').val('');
+            $('#keterangan').val('');
 }
 
 function reloadTable() {

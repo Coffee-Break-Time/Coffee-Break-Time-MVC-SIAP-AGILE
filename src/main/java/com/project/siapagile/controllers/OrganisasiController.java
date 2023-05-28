@@ -2,6 +2,7 @@ package com.project.siapagile.controllers;
 
 import com.project.siapagile.Helper;
 import com.project.siapagile.dto.CabangDTO;
+import com.project.siapagile.dto.organisasi.DepartemenDto;
 import com.project.siapagile.dto.organisasi.OrganisasiDto;
 //import com.project.siapagile.serviceImpl.CabangServiceImpl;
 import com.project.siapagile.models.Departemen;
@@ -48,17 +49,6 @@ public class OrganisasiController {
         return "redirect:/organisasi";
     }
 
-    @PostMapping("kantor/save")
-    public Object saveKantor(@Valid @ModelAttribute CabangDTO cabangDTO, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "redirect:/kantor";
-
-        }
-//        service.saveData(cabangDTO);
-        return "redirect:/organisasi";
-
-    }
-
     @RequestMapping("/kantor")
     public String kantor(Model model) {
         var data = service.getDataCabang();
@@ -68,27 +58,11 @@ public class OrganisasiController {
         return "organisasi/kantor";
     }
 
-    @RequestMapping("/unit-kerja")
-    public String unitKerja(Model model) {
-        var data = departemenService.getDataDepartemen();
-        model.addAttribute("data", data);
-        model.addAttribute("modal", "organisasi/modal/unit-kerja");
-
-        return "organisasi/unit-kerja";
-    }
-
-
     //    kantor dengan id untuk modal
     @GetMapping("/kantor/{id}")
     @ResponseBody
     public Object kantor(@PathVariable Integer id) {
         return service.getDataCabangById(id);
-    }
-
-    @GetMapping("/unit-kerja/{id}")
-    @ResponseBody
-    public Object unitKerja(@PathVariable Integer id) {
-        return departemenService.getDataDepartemenById(id);
     }
 
     @PostMapping("/kantor/upsert")
@@ -102,9 +76,32 @@ public class OrganisasiController {
         return "redirect:/organisasi/kantor";
     }
 
+    @GetMapping("/deleteKantor")
+    public String delete(@RequestParam Integer id) {
+        service.deleteData(id);
+        return "redirect:/organisasi/kantor";
+    }
+
+
+    @RequestMapping("/unitkerja")
+    public String unitkerja(Model model) {
+        var data = departemenService.getDataDepartemen();
+        model.addAttribute("data", data);
+        model.addAttribute("modal", "organisasi/modal/unit-kerja");
+        return "organisasi/unit-kerja";
+    }
+
+
+    @GetMapping("/unit-kerja/{id}")
+    @ResponseBody
+    public Object unitKerja(@PathVariable Integer id) {
+        return departemenService.getDataDepartemenById(id);
+    }
+
+
     @PostMapping("/unit-kerja/upsert")
     @ResponseBody
-    public Object upsert(@Valid @ModelAttribute Departemen dto, BindingResult br) {
+    public Object upsert(@Valid @ModelAttribute DepartemenDto dto, BindingResult br) {
         if (br.hasErrors()) {
             var errors = Helper.getErrors(br.getAllErrors());
             return ResponseEntity.badRequest().body(errors);
@@ -113,17 +110,10 @@ public class OrganisasiController {
         return "redirect:/organisasi/unit-kerja";
     }
 
-    @GetMapping("/deleteKantor")
-    public String delete(@RequestParam Integer id) {
-        service.deleteData(id);
-        return "redirect:/organisasi/kantor";
-    }
-
-    @RequestMapping("/unitkerja")
-    public String unitkerja(Model model) {
-        var data = departemenService.getDataDepartemen();
-        model.addAttribute("data", data);
-        return "organisasi/unit-kerja";
+    @GetMapping("/deleteUnitKerja")
+    public String deleteUnitKerja(@RequestParam Integer id) {
+        departemenService.deleteData(id);
+        return "redirect:/organisasi/unitkerja";
     }
 
     @RequestMapping("/staff")

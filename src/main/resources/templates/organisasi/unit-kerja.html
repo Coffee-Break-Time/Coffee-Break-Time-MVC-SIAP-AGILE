@@ -5,6 +5,9 @@
     <title th:replace="~{fragments/main-layout.html :: head/title}"></title>
     <th:block th:replace="~{fragments/main-layout.html :: head/link}"/>
     <th:block th:replace="~{fragments/main-layout.html :: head/script}"/>
+    <script th:src="@{/vendor/apexcharts/apexcharts.min.js}" defer></script>
+    <script type="text/javascript" th:src="@{/js/getData/getDataUnitKerja.js}" defer></script>
+
 
 
 </head>
@@ -33,55 +36,17 @@
     <section class="section dashboard">
         <div class="row">
             <div class="col-xxl-4 col-xl-12">
-
                 <div class="card info-card customers-card coba1">
-
-
-
                     <div class="card-body">
                         <div class="data-profile-perusahaan">
-                            <h5 class="card-title">Daftar Unit Kerja
-                            </h5>
-
+                            <h5 class="card-title">Daftar Unit Kerja</h5>
                             <div class="edit-delete">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#verticalycentered">
+                                        data-bs-target="#modalUnitKerja">
                                     <i class="bi bi-plus-lg"></i>
                                 </button>
-                                <div class="modal fade" id="verticalycentered" tabindex="-1">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Unit Kerja Baru</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="row g-3">
-                                                    <div class="mb-3">
-                                                        <label for="formGroupExampleInput" class="form-label">Nama Unit Kerja</label>
-                                                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nama Unit Kerja">
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label for="exampleFormControlTextarea1">Keterangan</label>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                        </div>
-                                                    </div>
 
-                                                    <!-- <div class="text-center">
-                                                      <button type="submit" class="btn btn-primary">Submit</button>
-                                                      <button type="reset" class="btn btn-secondary">Reset</button>
-                                                    </div> -->
-                                                </form><!-- Vertical Form -->
-
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary">Save changes</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!-- End Vertically centered Modal-->
+                                <div th:replace="~{${modal} :: modal }"></div>
                                 <span>
                                     <button onclick="window.location.reload();" type="button" class="btn btn-primary">
                                     <i class="bi bi-arrow-clockwise"></i>
@@ -90,72 +55,40 @@
                             </div>
                         </div>
                         <hr>
-                        <table class="table datatable">
+                        <table class="table datatable" id="tableUnitKerja">
                             <thead>
                             <tr>
                                 <th scope="col"></th>
                                 <th scope="col">Nama</th>
                                 <th scope="col">Keterangan </th>
-
                             </tr>
                             </thead>
                             <tbody>
                             <tr th:each="data : ${data}">
-                                <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#verticalycentered">
-                                    <i class="bi bi-pencil-square"></i>
-                                </button>
+                                <td style="padding: 8px 0px;">
+                                    <a type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                       data-bs-target="#modalUnitKerja"
+                                       th:data-id=${data.departemenId}
+                                       href="javascript:"
+                                       id="buttonEdit"
+                                    >
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    <a type="button" class="btn btn-danger"
+                                       th:href="@{/organisasi/deleteUnitKerja(id=${data.departemenId})}"
+                                    >
+                                        <i class="bi bi-trash"></i>
+                                    </a>
                                 </td>
                                 <td th:text="${data.namaDepartemen}"></td>
                                 <td th:text="${data.keterangan}"></td>
 
                             </tr>
-<!--                            <tr>-->
-<!--                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered">-->
-<!--                                    Edit-->
-<!--                                </button></td>-->
-<!--                                <td>Bridie Kessler</td>-->
-<!--                                <td>Developer</td>-->
-
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered">-->
-<!--                                    Edit-->
-<!--                                </button></td>-->
-<!--                                <td>Ashleigh Langosh</td>-->
-<!--                                <td>Finance</td>-->
-
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered">-->
-<!--                                    Edit-->
-<!--                                </button></td>-->
-<!--                                <td>Angus Grady</td>-->
-<!--                                <td>HR</td>-->
-
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered">-->
-<!--                                    Edit-->
-<!--                                </button></td>-->
-<!--                                <td>Raheem Lehner</td>-->
-<!--                                <td>Dynamic Division Officer</td>-->
-
-<!--                            </tr>-->
                             </tbody>
                         </table>
-
-
-
-
-
-
                     </div>
                 </div>
-
             </div><!-- End Customers Card -->
-
         </div>
     </section>
 
