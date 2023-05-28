@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CabangDTO {
 
-    private  Integer cabangId;
-    private  String namaCabang;
-    private  String nomorTelpCabang;
-    private  String jenisKantor;
-    private  String alamat;
+    private Integer cabangId;
+    private String namaCabang;
+    private String nomorTelpCabang;
+    private String jenisKantor;
+    private String alamat;
 }

@@ -23,16 +23,16 @@
     let btnSave = document.querySelector('#btnSave');
     // add event click
     btnSave.addEventListener('click', function (e) {
-        e.preventDefault();
+        // e.preventDefault();
         // call function saveDataKantor
         saveDataKantor();
     });
 
     let modalKantor = document.querySelector('#modalKantor');
-        //jika modalKantor hidden maka akan direset value
-        modalKantor.addEventListener('hidden.bs.modal', function () {
-            resetValues();
-        });
+    //jika modalKantor hidden maka akan direset value
+    modalKantor.addEventListener('hidden.bs.modal', function () {
+        resetValues();
+    });
 
 
 })();
@@ -64,7 +64,6 @@ function saveDataKantor() {
     let url = 'http://localhost:8080/organisasi/kantor/upsert'
     let method = form.attr('method');
     let data = form.serialize();
-
 
     console.log(data);
 
@@ -104,6 +103,8 @@ function reloadTable() {
     $('#tableKantor').load(domain + ' #tableKantor');*/
     //reload page
     window.location.reload();
+    //load head html and table kantor
+    // $('#tableKantor').load(document.URL + ' #tableKantor');
 }
 
 
