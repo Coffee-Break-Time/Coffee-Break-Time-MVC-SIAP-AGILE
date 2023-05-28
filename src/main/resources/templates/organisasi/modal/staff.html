@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="modal fade" id="modalStaff" tabindex="-1" th:fragment="modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Unit Kerja Baru</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        id="btnClose"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" id="formUpsertStaff" th:action="@{/organisasi/staff/upsert}" method="post">
+
+                    <div class="mb-3">
+                        <label for="namaStaff" class="form-label">Nama Staff</label>
+                        <input type="text" class="form-control" id="namaStaff" placeholder="Nama Staff"
+                               name="namaStaff">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email1" class="form-label">Email</label>
+                        <input type="text" class="form-control" id="email1" placeholder="Email" name="email1">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="namaDepartemenStaff" class="form-label">Unit Kerja</label>
+                        <input type="text" class="form-control" id="namaDepartemenStaff" placeholder="Unit Kerja"
+                               name="namaDepartemenStaff">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nomorTlp1" class="form-label">Telp 1</label>
+                        <input type="text" class="form-control" id="nomorTlp1" placeholder="Telp 1" name="nomorTlp1">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nomorTlp2" class="form-label">Telp 2</label>
+                        <input type="text" class="form-control" id="nomorTlp2" placeholder="Telp 2" name="nomorTlp2">
+                    </div>
+
+
+                    <!-- <div class="text-center">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button type="reset" class="btn btn-secondary">Reset</button>
+                    </div> -->
+                </form><!-- Vertical Form -->
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnSave" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div><!-- End Vertically centered Modal-->
+
+</body>
+</html>

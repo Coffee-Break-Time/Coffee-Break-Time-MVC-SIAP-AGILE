@@ -2,6 +2,7 @@ package com.project.siapagile.controllers;
 
 import com.project.siapagile.Helper;
 import com.project.siapagile.dto.CabangDTO;
+import com.project.siapagile.dto.StaffDTO;
 import com.project.siapagile.dto.organisasi.DepartemenDto;
 import com.project.siapagile.dto.organisasi.OrganisasiDto;
 //import com.project.siapagile.serviceImpl.CabangServiceImpl;
@@ -9,6 +10,7 @@ import com.project.siapagile.models.Departemen;
 import com.project.siapagile.services.CabangService;
 import com.project.siapagile.services.DepartemenService;
 import com.project.siapagile.services.OrganisasiService;
+import com.project.siapagile.services.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -31,6 +33,9 @@ public class OrganisasiController {
 
     @Autowired
     private OrganisasiService organisasiService;
+
+    @Autowired
+    private StaffService staffService;
 
     @RequestMapping("/profile")
     public String index(Model model) {
@@ -117,7 +122,34 @@ public class OrganisasiController {
     }
 
     @RequestMapping("/staff")
-    public String staff() {
+    public String staff(Model model) {
+        var data = staffService.getDataStaff();
+        model.addAttribute("modal", "organisasi/modal/staff");
+        model.addAttribute("data", data);
+
         return "organisasi/staff";
+    }
+
+    @GetMapping("/staff/{namaStaff}")
+    @ResponseBody
+    public Object getDataStaff(@PathVariable String namaStaff) {
+        return staffService.getDataStaffById(namaStaff);
+    }
+
+    @PostMapping("/staff/upsert")
+    @ResponseBody
+    public Object upsertStaff(@Valid @ModelAttribute StaffDTO staffDTO, BindingResult br) {
+        if (br.hasErrors()) {
+            var errors = Helper.getErrors(br.getAllErrors());
+            return ResponseEntity.badRequest().body(errors);
+        }
+        staffService.saveData(staffDTO);
+        return true;
+    }
+
+    @GetMapping("/deleteStaff")
+    public String deleteStaff(@RequestParam String namaStaff) {
+        staffService.deleteData(namaStaff);
+        return "redirect:/organisasi/staff";
     }
 }

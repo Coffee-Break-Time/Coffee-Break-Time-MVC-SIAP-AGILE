@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta th:replace="~{fragments/main-layout.html :: head/meta}"/>
     <title th:replace="~{fragments/main-layout.html :: head/title}"></title>
     <th:block th:replace="~{fragments/main-layout.html :: head/link}"/>
     <th:block th:replace="~{fragments/main-layout.html :: head/script}"/>
+    <script type="text/javascript" th:src="@{/js/getData/getDataStaff.js}" defer></script>
 
 
 </head>
@@ -37,35 +38,20 @@
                             <div class="edit-delete">
 
                                 <!-- button tambah -->
-                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#verticalycentered">
-                                    <i class="bi bi-person-plus-fill"></i>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#modalStaff">
+                                    <i class="bi bi-plus-lg"></i>
                                 </button>
+
+                                <div th:replace="~{${modal} :: modal }"></div>
 
                                 <!-- button refresh -->
                                 <button type="button" class="btn">
-                                    <i class="bi bi-arrow-clockwise"></i>
-                                </button>
+                                    <button onclick="window.location.reload();" type="button" class="btn btn-primary">
+                                        <i class="bi bi-arrow-clockwise"></i>
+                                    </button>
 
 
-
-                                <div class="modal fade" id="verticalycentered" tabindex="-1">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Registrasi Staff</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-
-
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary">Save changes</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!-- End Vertically centered Modal-->
                             </div>
                         </div>
                         <hr>
@@ -74,75 +60,42 @@
                             <tr>
                                 <th scope="col"></th>
                                 <th scope="col">Nama</th>
-                                <th scope="col">Email </th>
-                                <th scope="col">Unit Kerja </th>
-                                <th scope="col">Telp 1 </th>
-                                <th scope="col">Telp 2 </th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Unit Kerja</th>
+                                <th scope="col">Telp 1</th>
+                                <th scope="col">Telp 2</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#verticalycentered">
-                                    <i class="bi bi-person-plus-fill"></i>
-                                </button></td>
-                                <td>Brandon Jacob</td>
-                                <td>Designer</td>
-                                <td>Brandon Jacob</td>
-                                <td>Designer</td>
-                                <td>Designer</td>
+                            <tr th:each="data : ${data}">
+                                <td>
+                                    <a type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                       data-bs-target="#modalStaff"
+                                       th:data-id=${data.namaStaff}
+                                       href="javascript:"
+                                       id="buttonEdit"
+                                    >
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    <a type="button" class="btn btn-danger"
+                                       th:href="@{/organisasi/deleteStaff(namaStaff=${data.namaStaff})}"
+                                       id="buttonDelete"
+                                    >
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                                <td th:text="${data.namaStaff}"></td>
+                                <td th:text="${data.email1}"></td>
+                                <td th:text="${data.namaDepartemenStaff}"></td>
+                                <td th:text="${data.nomorTlp1}"></td>
+                                <td th:text="${data.nomorTlp2}"></td>
 
                             </tr>
-                            <tr>
-                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered">
-                                    <i class="bi bi-person-plus-fill"></i>
-                                </button></td>
-                                <td>Brandon Jacob</td>
-                                <td>Designer</td>
-                                <td>Brandon Jacob</td>
-                                <td>Designer</td>
-                                <td>Designer</td>
 
-                            </tr>
-                            <tr>
-                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered">
-                                    <i class="bi bi-person-plus-fill"></i>
-                                </button></td>
-                                <td>Brandon Jacob</td>
-                                <td>Designer</td>
-                                <td>Brandon Jacob</td>
-                                <td>Designer</td>
-                                <td>Designer</td>
 
-                            </tr>
-                            <tr>
-                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered">
-                                    <i class="bi bi-person-plus-fill"></i>
-                                </button></td>
-                                <td>Brandon Jacob</td>
-                                <td>Designer</td>
-                                <td>Brandon Jacob</td>
-                                <td>Designer</td>
-                                <td>Designer</td>
-
-                            </tr>
-                            <tr>
-                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered">
-                                    <i class="bi bi-person-plus-fill"></i>
-                                </button></td>
-                                <td>Brandon Jacob</td>
-                                <td>Designer</td>
-                                <td>Brandon Jacob</td>
-                                <td>Designer</td>
-                                <td>Designer</td>
-
-                            </tr>
                             </tbody>
+
                         </table>
-
-
-
-
 
 
                     </div>
@@ -151,6 +104,8 @@
             </div><!-- End Customers Card -->
 
         </div>
+
+
     </section>
 
 </main>
