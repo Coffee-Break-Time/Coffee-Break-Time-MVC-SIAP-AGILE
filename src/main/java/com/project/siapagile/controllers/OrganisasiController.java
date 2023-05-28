@@ -4,6 +4,7 @@ import com.project.siapagile.Helper;
 import com.project.siapagile.dto.CabangDTO;
 import com.project.siapagile.dto.organisasi.OrganisasiDto;
 //import com.project.siapagile.serviceImpl.CabangServiceImpl;
+import com.project.siapagile.models.Departemen;
 import com.project.siapagile.services.CabangService;
 import com.project.siapagile.services.DepartemenService;
 import com.project.siapagile.services.OrganisasiService;
@@ -67,12 +68,27 @@ public class OrganisasiController {
         return "organisasi/kantor";
     }
 
+    @RequestMapping("/unit-kerja")
+    public String unitKerja(Model model) {
+        var data = departemenService.getDataDepartemen();
+        model.addAttribute("data", data);
+        model.addAttribute("modal", "organisasi/modal/unit-kerja");
+
+        return "organisasi/unit-kerja";
+    }
+
 
     //    kantor dengan id untuk modal
     @GetMapping("/kantor/{id}")
     @ResponseBody
     public Object kantor(@PathVariable Integer id) {
         return service.getDataCabangById(id);
+    }
+
+    @GetMapping("/unit-kerja/{id}")
+    @ResponseBody
+    public Object unitKerja(@PathVariable Integer id) {
+        return departemenService.getDataDepartemenById(id);
     }
 
     @PostMapping("/kantor/upsert")
@@ -83,7 +99,24 @@ public class OrganisasiController {
             return ResponseEntity.badRequest().body(errors);
         }
         service.saveData(cabangDTO);
-        return true;
+        return "redirect:/organisasi/kantor";
+    }
+
+    @PostMapping("/unit-kerja/upsert")
+    @ResponseBody
+    public Object upsert(@Valid @ModelAttribute Departemen dto, BindingResult br) {
+        if (br.hasErrors()) {
+            var errors = Helper.getErrors(br.getAllErrors());
+            return ResponseEntity.badRequest().body(errors);
+        }
+        departemenService.saveData(dto);
+        return "redirect:/organisasi/unit-kerja";
+    }
+
+    @GetMapping("/deleteKantor")
+    public String delete(@RequestParam Integer id) {
+        service.deleteData(id);
+        return "redirect:/organisasi/kantor";
     }
 
     @RequestMapping("/unitkerja")
