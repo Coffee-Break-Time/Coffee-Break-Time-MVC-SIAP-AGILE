@@ -75,7 +75,7 @@
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                     <a type="button" class="btn btn-danger"
-                                       th:href="@{/organisasi/deleteUnitKerja(id=${data.departemenId})}"
+                                       th:href="@{/organisasi/deleteUnitKerja(id=${data.departemenId})}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"
                                     >
                                         <i class="bi bi-trash"></i>
                                     </a>

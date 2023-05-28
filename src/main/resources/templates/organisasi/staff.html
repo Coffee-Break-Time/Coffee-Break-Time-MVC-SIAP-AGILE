@@ -78,7 +78,9 @@
                                     </a>
                                     <a type="button" class="btn btn-danger"
                                        th:href="@{/organisasi/deleteStaff(namaStaff=${data.namaStaff})}"
-                                       id="buttonDelete"
+                                       id="buttonDelete" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"
+
+
                                     >
                                         <i class="bi bi-trash"></i>
                                     </a>
@@ -103,6 +105,8 @@
             </div><!-- End Customers Card -->
 
         </div>
+
+
 
 
     </section>
