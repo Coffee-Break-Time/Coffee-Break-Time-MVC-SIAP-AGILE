@@ -97,7 +97,7 @@
                     </li>
 
                     <li>
-                        <a th:href="@{/organisasi/kantor}">
+                        <a th:href="@{/kantor/kantor}">
                             <i class="bi bi-circle"></i><span>Kantor</span>
                         </a>
                     </li>
@@ -248,10 +248,14 @@
             </li>
 
             <li>
-                <a class="dropdown-item d-flex align-items-center" href="/">
+                <form th:attr="action=@{/logout}" method="POST" class="dropdown-item d-flex align-items-center">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <button type="submit"><i class="bi bi-box-arrow-right"></i><span>Sign Out</span></button>
+                </form>
+               <!-- <a class="dropdown-item d-flex align-items-center" th:>
                     <i class="bi bi-box-arrow-right"></i>
                     <span>Sign Out</span>
-                </a>
+                </a>-->
             </li>
 
         </ul><!-- End Profile Dropdown Items -->
