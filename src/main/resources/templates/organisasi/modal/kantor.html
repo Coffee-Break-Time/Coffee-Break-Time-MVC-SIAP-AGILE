@@ -14,22 +14,33 @@
         <div class="modal-content">
             <form id="formUpsertKantor" method="post">
                 <div class="modal-header">
-                    <h5 class="modal-title">Kantor Baru</h5>
+
+                    <h5 class="modal-title" id="kantorTitle" >Kantor Baru</h5>
                     <button type="button" class="btn-close" id="btnClose" data-bs-dismiss="modal"
                             aria-label="Close"></button>
+
                 </div>
+                <script defer>
+                    function openModal(value) {
+                        // Set the value in the modal
+                        document.getElementById('kantorTitle').textContent = value;
+
+                    }
+                </script>
                 <div class="modal-body">
                     <form class="row g-3">
-                        <input type="hidden" id="cabangId" name="cabangId"/>
+                        <input type="hidden" id="id" name="id"/>
                         <div class="col-12">
-                            <label for="namaCabang" class="form-label">Nama Kantor</label>
-                            <input type="text" class="form-control" id="namaCabang" name="namaCabang"
+                            <label for="ktrname" class="form-label">Nama Kantor</label>
+                            <input type="text" class="form-control" id="ktrname" name="ktrname"
                                    placeholder="Nama Kantor">
                         </div>
                         <div class="col-12">
-                            <label for="nomorTelpCabang" class="form-label">Nomor Telepon
+                            <label for="ktrnohp" class="form-label">Nomor Telepon
                             </label>
-                            <input type="text" class="form-control" id="nomorTelpCabang" name="nomorTelpCabang"
+
+
+                            <input type="text" class="form-control" id="ktrnohp" name="ktrnohp"
                                    placeholder="Nomor Telepon">
 
                         </div>
@@ -38,7 +49,7 @@
 
                             <div class="form-check">
                                 <input class="form-check-input" type="radio"
-                                       name="jenisKantor"
+                                       name="ktrjns"
                                        value="Syariah"
                                        id="syariah">
                                 <label class="form-check-label" for="syariah">
@@ -47,7 +58,7 @@
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio"
-                                       name="jenisKantor"
+                                       name="ktrjns"
                                        value="Konven"
                                        id="konven" checked>
                                 <label class="form-check-label" for="konven">
@@ -59,9 +70,9 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="alamat">Alamat</label>
+                                <label for="ktradds">Alamat</label>
                                 <textarea class="form-control"
-                                          id="alamat" name="alamat"
+                                          id="ktradds" name="ktradds"
                                           rows="3" placeholder="Alamat"></textarea>
                             </div>
                         </div>

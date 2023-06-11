@@ -1,6 +1,7 @@
 package com.project.siapagile.models;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+
 import lombok.*;
 
 import java.util.LinkedHashSet;
@@ -39,19 +40,9 @@ public class Usrmst {
     @Column(name = "USRROLE")
     private Integer usrrole;
 
-    @OneToMany(mappedBy = "unkjnpp")
-    private Set<Lunknusr> lunknusrs = new LinkedHashSet<>();
+    @Column(name = "USSRGETROLE")
+    private String usrGetRole;
 
-    @OneToMany(mappedBy = "prjpown")
-    private Set<Prjmast> prjmasts = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "rwtctby")
-    private Set<Rtskmast> rtskmasts = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "tprjusr1")
-    private Set<Tprjtem> tprjtems1 = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "tprjusr2")
-    private Set<Tprjtem> tprjtems2 = new LinkedHashSet<>();
 
 }

@@ -41,7 +41,7 @@
                             <h5 class="card-title">Daftar Kantor</h5>
                             <div class="edit-delete">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#modalKantor">
+                                        data-bs-target="#modalKantor" onclick="openModal('Kantor Baru')">
                                     <i class="bi bi-plus-lg"></i>
                                 </button>
 
@@ -70,22 +70,23 @@
                                 <td>
                                     <a type="button" class="btn btn-primary" data-bs-toggle="modal"
                                        data-bs-target="#modalKantor"
-                                       th:data-id=${data.cabangId}
+                                       th:data-id=${data.id}
                                        href="javascript:"
                                        id="buttonEdit"
+                                       onclick="openModal('Edit Kantor')"
                                     >
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                     <a type="button" class="btn btn-danger"
-                                       th:href="@{/organisasi/deleteKantor(id=${data.cabangId})}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"
+                                       th:href="@{/kantor/deleteKantor(id=${data.id})}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"
                                     >
                                         <i class="bi bi-trash"></i>
                                     </a>
                                 </td>
-                                <td th:text="${data.namaCabang}"></td>
-                                <td th:text="${data.nomorTelpCabang}"></td>
-                                <td th:text="${data.jenisKantor}"></td>
-                                <td th:text="${data.alamat}"></td>
+                                <td th:text="${data.ktrname}"></td>
+                                <td th:text="${data.ktrnohp}"></td>
+                                <td th:text="${data.ktrjns}"></td>
+                                <td th:text="${data.ktradds}"></td>
                             </tr>
 
                             </tbody>

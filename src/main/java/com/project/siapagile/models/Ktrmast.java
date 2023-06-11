@@ -1,8 +1,8 @@
 package com.project.siapagile.models;
 
-import jakarta.persistence.*;
 import lombok.*;
 
+import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -25,12 +25,11 @@ public class Ktrmast {
     private Integer ktrnohp;
 
     @Column(name = "KTRJNS")
-    private Integer ktrjns;
+    private String ktrjns;
 
     @Column(name = "KTRADDS")
     private String ktradds;
 
-    @OneToMany(mappedBy = "prjktr")
-    private Set<Prjmast> prjmasts = new LinkedHashSet<>();
+
 
 }
