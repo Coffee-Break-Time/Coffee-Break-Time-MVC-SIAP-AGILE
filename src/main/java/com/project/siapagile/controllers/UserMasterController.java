@@ -46,6 +46,18 @@ public class UserMasterController {
         }
     }
 
+    //forgot password
+    @PostMapping("forgot")
+    public String forgotPassword(Model model,Integer userName,Usrmst user){
+        model.addAttribute("user", user);
+        model.addAttribute("npp",user.getId());
+
+        userMasterService.forgotPassword(user.getId());
+        return "redirect:/user/login";
+    }
+
+
+
 
 
 

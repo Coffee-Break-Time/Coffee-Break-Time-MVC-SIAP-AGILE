@@ -19,11 +19,21 @@ public interface UsrmstRepository extends JpaRepository<Usrmst, Integer> {
     public Long count(@Param("username") String username);
 
     @Query("""
-        SELECT a.id,a.usrname,a.usradds,a.usrGetRole,a.usrmail,a.usrpwd
+        SELECT a.id,a.usrname,a.usradds,a.usrrole.id,a.usrmail,a.usrpwd
         FROM Usrmst a
         WHERE a.usrname = :username
         """)
     public Usrmst getUserByUserName(@Param("username") String username);
 
+    @Query("""
+        SELECT '*'
+        FROM Usrmst a
+        WHERE a.usrname = :email
+        """)
+     Optional<Usrmst> getUserByEmail(@Param("email") String email);
+
+    //get user by email
+
+    Optional<Usrmst> findByUsrmail(String usrmail);
 
 }

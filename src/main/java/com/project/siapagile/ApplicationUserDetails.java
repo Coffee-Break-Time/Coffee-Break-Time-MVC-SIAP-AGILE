@@ -17,9 +17,9 @@ public class ApplicationUserDetails implements UserDetails {
 
 
     public ApplicationUserDetails(Usrmst user) {
-        this.username = user.getUsrname();
+        this.username = user.getUsrmail();
         this.password = user.getUsrpwd();
-        this.authorities.add(new SimpleGrantedAuthority(user.getUsrGetRole()));
+        this.authorities.add(new SimpleGrantedAuthority(user.getUsrrole().getId().toString()));
     }
 
     @Override

@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserMasterServiceImpl implements UserMasterService , UserDetailsService {
+public class UserMasterServiceImpl implements UserMasterService, UserDetailsService {
 
     @Autowired
     private UsrmstRepository usrmstRepository;
@@ -22,7 +22,7 @@ public class UserMasterServiceImpl implements UserMasterService , UserDetailsSer
     @Override
     public Boolean checkExixtingUsername(String username) {
         var checkAccount = usrmstRepository.count(username);
-        return (checkAccount > 0 )? true : false;
+        return (checkAccount > 0) ? true : false;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class UserMasterServiceImpl implements UserMasterService , UserDetailsSer
     @Override
     public Boolean userLogin(String UserName, String Password) {
         var userLogin = usrmstRepository.getUserByUserName(UserName);
-        if (UserName == userLogin.getUsrname() &&  Password == userLogin.getUsrpwd()) {
+        if (UserName == userLogin.getUsrname() && Password == userLogin.getUsrpwd()) {
             return true;
         }
         return false;
@@ -52,16 +52,37 @@ public class UserMasterServiceImpl implements UserMasterService , UserDetailsSer
                 user.getUsrimg(),
                 user.getUsrmail(),
                 user.getUsradds(),
-                user.getUsrrole(),
-                user.getUsrGetRole()
-                );
+                user.getUsrrole().getId()
+//                user.getUsrGetRole()
+        );
+//        validate email exitst in database
+        String email = user.getUsrmail();
+        var existingAccount = usrmstRepository.findByUsrmail(email);
+
+        if (null != existingAccount ) {
+            throw new RuntimeException("Email sudah terdaftar");
+
+        }
         usrmstRepository.save(account);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var user = usrmstRepository.findById(Integer.valueOf(username));
+        var user = usrmstRepository.findByUsrmail(username);
         var userDetail = new ApplicationUserDetails(user.get());
         return userDetail;
+    }
+
+    @Override
+    public void forgotPassword(Integer UserName) {
+        var user = usrmstRepository.findById(UserName);
+        if (user.isPresent()) {
+            var usr = user.get();
+            PasswordEncoder passwordEncoder = MvcConfigSecurity.getPasswordEncode();
+            var UserNameEncrypt = usr.getId();
+            String hashPassword = passwordEncoder.encode(UserNameEncrypt.toString());
+            usr.setUsrpwd(hashPassword);
+            usrmstRepository.save(usr);
+        }
     }
 }

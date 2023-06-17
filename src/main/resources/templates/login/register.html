@@ -1,26 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head ></head>
+<head></head>
 <body class="authentication-body">
 <div class="authentication-wrapper">
-  <header>KIW</header>
-  <main>
-    <h1>Sign Up</h1>
-    <form method="POST" th:action="@{/user/register}" th:object="${account}">
-      <input placeholder="NPP.." th:field="*{id}" type="text">
-      <input placeholder="usrname.." th:field="*{usrname}" type="text">
-      <input placeholder="usrpwd.." th:field="*{usrpwd}" type="password">
-      <input placeholder="usrimg.." th:field="*{usrimg}" type="text">
-      <input placeholder="usrmail.." th:field="*{usrmail}" type="text">
-      <input placeholder="usradds.." th:field="*{usradds}" type="text">
-      <input placeholder="usrrole.." th:field="*{usrrole}" type="text">
-      <input placeholder="usrGetRole.." th:field="*{usrGetRole}" type="text">
+    <header>KIW</header>
+    <main>
+        <h1>Sign Up</h1>
+        <form method="POST" th:action="@{/user/register}" th:object="${account}">
+            <input placeholder="NPP.." th:field="*{id}" type="text">
+            <input placeholder="usrname.." th:field="*{usrname}" type="text">
+            <input placeholder="usrpwd.." th:field="*{usrpwd}" type="password">
+            <input placeholder="usrimg.." th:field="*{usrimg}" type="text">
+            <input placeholder="usrmail.." th:field="*{usrmail}" type="text">
+            <input placeholder="usradds.." th:field="*{usradds}" type="text">
+            <input placeholder="usrrole.." th:field="*{usrrole.id}" type="text">
+            <input placeholder="usrGetRole.." th:field="*{ussrgetrole}" type="text">
 
 
+            <button type="submit">Register</button>
 
-      <button type="submit">Register</button>
-    </form>
-  </main>
+        </form>
+
+        <hr>
+
+        <form method="post" th:action="@{/user/forgot}" th:object="${account}">
+            <input placeholder="NPP.." type="text" th:field="*{id}">
+
+            <button type="submit">Register</button>
+        </form>
+    </main>
 </div>
 </body>
 </html>

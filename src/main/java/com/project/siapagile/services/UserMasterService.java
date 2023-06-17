@@ -12,4 +12,6 @@ public interface UserMasterService{
 
     public void registerAccount(Usrmst user) ;
 
+    public void forgotPassword(Integer UserName);
+
 }

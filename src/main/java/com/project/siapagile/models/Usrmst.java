@@ -1,11 +1,8 @@
 package com.project.siapagile.models;
 
-import javax.persistence.*;
-
 import lombok.*;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -37,12 +34,21 @@ public class Usrmst {
     @Column(name = "USRADDS", nullable = false)
     private String usradds;
 
-    @Column(name = "USRROLE")
-    private Integer usrrole;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USRROLE")
+    private Rolemast usrrole;
 
-    @Column(name = "USSRGETROLE")
-    private String usrGetRole;
+    @Column(name = "USSRGETROLE", length = 50)
+    private String ussrgetrole;
 
-
-
+    public Usrmst(Integer id, String usrname, String usrpwd, String usrnohp, Integer usrimg, String usrmail, String usradds, Integer usrrole) {
+        this.id = id;
+        this.usrname = usrname;
+        this.usrpwd = usrpwd;
+        this.usrnohp = usrnohp;
+        this.usrimg = usrimg;
+        this.usrmail = usrmail;
+        this.usradds = usradds;
+        this.usrrole = new Rolemast(usrrole);
+    }
 }
