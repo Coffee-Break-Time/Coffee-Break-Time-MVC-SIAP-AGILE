@@ -62,7 +62,6 @@
                                 <th scope="col">Email</th>
                                 <th scope="col">Unit Kerja</th>
                                 <th scope="col">Telp 1</th>
-                                <th scope="col">Telp 2</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -73,6 +72,7 @@
                                        th:data-id=${data.namaStaff}
                                        href="javascript:"
                                        id="buttonEdit"
+                                       onclick="openModal('Update Staff')"
                                     >
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
@@ -89,7 +89,7 @@
                                 <td th:text="${data.email1}"></td>
                                 <td th:text="${data.namaDepartemenStaff}"></td>
                                 <td th:text="${data.nomorTlp1}"></td>
-                                <td th:text="${data.nomorTlp2}"></td>
+<!--                                <td th:text="${data.nomorTlp2}"></td>-->
 
                             </tr>
 

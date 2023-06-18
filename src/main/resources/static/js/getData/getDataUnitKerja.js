@@ -48,6 +48,7 @@ function getDataUnitKerja(id) {
         $('#departemenId').val(data.departemenId);
         $('#namaDepartemen').val(data.namaDepartemen);
         $('#keterangan').val(data.keterangan);
+        $('#projectManager').val(data.projectManager);
 //        $('#alamat').val(data.alamat);
 //        if (data.jenisKantor == 'Konven') {
 //            $('#konven').prop('checked', true);
@@ -77,6 +78,7 @@ function saveDataKantor() {
             resetValues();
             $('#modalUnitKerja').modal('hide');
             reloadTable();
+            window.location.href = 'http://localhost:8080/organisasi/unitkerja';
         },
         error: function (response) {
             let errors = response;
@@ -94,6 +96,7 @@ function resetValues() {
             $('#departemenId').val('');
             $('#namaDepartemen').val('');
             $('#keterangan').val('');
+            $('#projectManager').val('');
 }
 
 function reloadTable() {

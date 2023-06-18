@@ -10,10 +10,17 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Unit Kerja Baru</h5>
+                <h5 class="modal-title">Staff Baru</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                         id="btnClose"></button>
             </div>
+            <script defer>
+                    function openModal(value) {
+                        // Set the value in the modal
+                        document.getElementById('staffTitle').textContent = value;
+
+                    }
+                </script>
             <div class="modal-body">
                 <form class="row g-3" id="formUpsertStaff" th:action="@{/organisasi/staff/upsert}" method="post">
 
@@ -39,10 +46,10 @@
                         <input type="text" class="form-control" id="nomorTlp1" placeholder="Telp 1" name="nomorTlp1">
                     </div>
 
-                    <div class="mb-3">
-                        <label for="nomorTlp2" class="form-label">Telp 2</label>
-                        <input type="text" class="form-control" id="nomorTlp2" placeholder="Telp 2" name="nomorTlp2">
-                    </div>
+<!--                    <div class="mb-3">-->
+<!--                        <label for="nomorTlp2" class="form-label">Telp 2</label>-->
+<!--                        <input type="text" class="form-control" id="nomorTlp2" placeholder="Telp 2" name="nomorTlp2">-->
+<!--                    </div>-->
 
 
                     <!-- <div class="text-center">

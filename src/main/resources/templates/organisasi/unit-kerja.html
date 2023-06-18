@@ -42,7 +42,7 @@
                             <h5 class="card-title">Daftar Unit Kerja</h5>
                             <div class="edit-delete">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#modalUnitKerja">
+                                        data-bs-target="#modalUnitKerja" onclick="openModal('Unit Kerja Baru')">
                                     <i class="bi bi-plus-lg"></i>
                                 </button>
 
@@ -71,6 +71,7 @@
                                        th:data-id=${data.departemenId}
                                        href="javascript:"
                                        id="buttonEdit"
+                                       onclick="openModal('Update Unit Kerja')"
                                     >
                                         <i class="bi bi-pencil-square"></i>
                                     </a>

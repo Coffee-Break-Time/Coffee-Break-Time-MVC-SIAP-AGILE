@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DaftarProjectFinalDto {
+public class DaftarProjectInputDto {
 
     private Integer projectId;
     private String namaProject;
@@ -23,7 +23,7 @@ public class DaftarProjectFinalDto {
     private String projectManager;
     private String anggota;
     private Integer bobot;
-    private LocalDate tglMulai;
-    private LocalDate tglSelesai;
+    private String tglMulai;
+    private String tglSelesai;
     private String description;
 }

@@ -35,12 +35,13 @@ public class MvcConfigSecurity extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/css/**",  "/js/**",
                         "/img/**","/vendor/**","/scss/**" ,"/user/**", "/login").permitAll()
+                .antMatchers("/organisasi/unit-kerja/upsert").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")
                 .loginProcessingUrl("/authenticating").defaultSuccessUrl("/dashboard")
                 .and()
-                .logout();
+                .logout().and().csrf().disable();
 
 
 

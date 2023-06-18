@@ -16,8 +16,8 @@ public class ProjectRestController {
     private ProjectService projectService;
 
 
-    @GetMapping("/find-by-id/{id}")
-    public DaftarProjectFinalDto findByIdDto(@PathVariable Integer id) {
-        return projectService.findByIdProject(id);
-    }
+//    @GetMapping("/find-by-id/{id}")
+//    public DaftarProjectFinalDto findByIdDto(@PathVariable Integer id) {
+//        return projectService.findByIdProject(id);
+//    }
 }

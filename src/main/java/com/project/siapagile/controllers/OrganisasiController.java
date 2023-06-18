@@ -1,16 +1,11 @@
 package com.project.siapagile.controllers;
 
 import com.project.siapagile.Helper;
-import com.project.siapagile.dto.CabangDTO;
-import com.project.siapagile.dto.StaffDTO;
 import com.project.siapagile.dto.organisasi.DepartemenDto;
 import com.project.siapagile.dto.organisasi.OrganisasiDto;
 //import com.project.siapagile.serviceImpl.CabangServiceImpl;
-import com.project.siapagile.models.Departemen;
-import com.project.siapagile.services.CabangService;
-import com.project.siapagile.services.DepartemenService;
-import com.project.siapagile.services.OrganisasiService;
-import com.project.siapagile.services.StaffService;
+import com.project.siapagile.dto.organisasi.StaffDto;
+import com.project.siapagile.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -32,6 +27,9 @@ public class OrganisasiController {
     DepartemenService departemenService;
 
     @Autowired
+    UnitKerjaService unitKerjaService;
+
+    @Autowired
     private OrganisasiService organisasiService;
 
     @Autowired
@@ -51,48 +49,15 @@ public class OrganisasiController {
             return "redirect:/organisasi";
         }
         organisasiService.saveData(dto);
-        return "redirect:/organisasi";
+        return "redirect:/organisasi/profile";
     }
-
-    @RequestMapping("/kantor")
-    public String kantor(Model model) {
-        var data = service.getDataCabang();
-        model.addAttribute("data", data);
-        model.addAttribute("modal", "organisasi/modal/kantor");
-
-        return "organisasi/kantor";
-    }
-
-    //    kantor dengan id untuk modal
-    @GetMapping("/kantor/{id}")
-    @ResponseBody
-    public Object kantor(@PathVariable Integer id) {
-        return service.getDataCabangById(id);
-    }
-
-    @PostMapping("/kantor/upsert")
-    @ResponseBody
-    public Object upsert(@Valid @ModelAttribute CabangDTO cabangDTO, BindingResult br) {
-        if (br.hasErrors()) {
-            var errors = Helper.getErrors(br.getAllErrors());
-            return ResponseEntity.badRequest().body(errors);
-        }
-        service.saveData(cabangDTO);
-        return "redirect:/organisasi/kantor";
-    }
-
-    @GetMapping("/deleteKantor")
-    public String delete(@RequestParam Integer id) {
-        service.deleteData(id);
-        return "redirect:/organisasi/kantor";
-    }
-
 
     @RequestMapping("/unitkerja")
     public String unitkerja(Model model) {
-        var data = departemenService.getDataDepartemen();
+        var data = unitKerjaService.getData();
         model.addAttribute("data", data);
         model.addAttribute("modal", "organisasi/modal/unit-kerja");
+        model.addAttribute("dropdownUnitKerja", unitKerjaService.dropdownUnitKerja());
         return "organisasi/unit-kerja";
     }
 
@@ -100,24 +65,25 @@ public class OrganisasiController {
     @GetMapping("/unit-kerja/{id}")
     @ResponseBody
     public Object unitKerja(@PathVariable Integer id) {
-        return departemenService.getDataDepartemenById(id);
+        return unitKerjaService.getDataById(id);
     }
 
 
     @PostMapping("/unit-kerja/upsert")
     @ResponseBody
     public Object upsert(@Valid @ModelAttribute DepartemenDto dto, BindingResult br) {
+        System.out.println("update : " + dto);
         if (br.hasErrors()) {
             var errors = Helper.getErrors(br.getAllErrors());
             return ResponseEntity.badRequest().body(errors);
         }
-        departemenService.saveData(dto);
+        unitKerjaService.saveData(dto);
         return "redirect:/organisasi/unit-kerja";
     }
 
     @GetMapping("/deleteUnitKerja")
     public String deleteUnitKerja(@RequestParam Integer id) {
-        departemenService.deleteData(id);
+        unitKerjaService.deleteData(id);
         return "redirect:/organisasi/unitkerja";
     }
 
@@ -138,7 +104,7 @@ public class OrganisasiController {
 
     @PostMapping("/staff/upsert")
     @ResponseBody
-    public Object upsertStaff(@Valid @ModelAttribute StaffDTO staffDTO, BindingResult br) {
+    public Object upsertStaff(@Valid @ModelAttribute StaffDto staffDTO, BindingResult br) {
         if (br.hasErrors()) {
             var errors = Helper.getErrors(br.getAllErrors());
             return ResponseEntity.badRequest().body(errors);

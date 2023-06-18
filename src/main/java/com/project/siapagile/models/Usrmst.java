@@ -26,7 +26,7 @@ public class Usrmst {
     private String usrnohp;
 
     @Column(name = "USRIMG", nullable = false)
-    private Integer usrimg;
+    private String usrimg;
 
     @Column(name = "USRMAIL", nullable = false)
     private String usrmail;
@@ -41,7 +41,7 @@ public class Usrmst {
     @Column(name = "USSRGETROLE", length = 50)
     private String ussrgetrole;
 
-    public Usrmst(Integer id, String usrname, String usrpwd, String usrnohp, Integer usrimg, String usrmail, String usradds, Integer usrrole) {
+    public Usrmst(Integer id, String usrname, String usrpwd, String usrnohp, String usrimg, String usrmail, String usradds, Integer usrrole) {
         this.id = id;
         this.usrname = usrname;
         this.usrpwd = usrpwd;
@@ -50,5 +50,8 @@ public class Usrmst {
         this.usrmail = usrmail;
         this.usradds = usradds;
         this.usrrole = new Rolemast(usrrole);
+    }
+
+    public Usrmst(String namaStaff, String email1, String namaDepartemenStaff, String nomorTlp1) {
     }
 }

@@ -1,6 +1,6 @@
 package com.project.siapagile.models;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;

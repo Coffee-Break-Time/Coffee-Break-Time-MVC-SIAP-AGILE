@@ -91,7 +91,7 @@
                 </a>
                 <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a th:href="@{/organisasi}">
+                        <a th:href="@{/organisasi/profile}">
                             <i class="bi bi-circle"></i><span>Profil Organisasi</span>
                         </a>
                     </li>
@@ -249,7 +249,7 @@
 
             <li>
                 <form th:attr="action=@{/logout}" method="POST" class="dropdown-item d-flex align-items-center">
-                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+<!--                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
                     <button type="submit"><i class="bi bi-box-arrow-right"></i><span>Sign Out</span></button>
                 </form>
                <!-- <a class="dropdown-item d-flex align-items-center" th:>

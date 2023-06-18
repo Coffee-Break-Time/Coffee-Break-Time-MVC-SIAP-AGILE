@@ -6,7 +6,6 @@
 </head>
 <body>
 
-
 <!--Modal-->
 <div class="modal fade" id="modalUnitKerja" tabindex="-1" th:fragment="modal"
      aria-labelledby="modalUnitKerjaLabel" aria-hidden="true">
@@ -16,26 +15,46 @@
                 <div class="modal-header">
 
 
-                    <h5 class="modal-title">Unit Kerja Baru</h5>
+                    <h5 class="modal-title" id="unitKerjaTitle">Unit Kerja Baru</h5>
                     <button type="button" class="btn-close" id="btnClose" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form class="row g-3">
                         <input type="hidden" id="departemenId" name="departemenId"/>
+
                         <div class="mb-3">
                             <label for="namaDepartemen" class="form-label">Nama Unit Kerja</label>
                             <input type="text" class="form-control" id="namaDepartemen" name="namaDepartemen" placeholder="Nama Unit Kerja">
                         </div>
+                        <script defer>
+                        function openModal(value) {
+                        // Set the value in the modal
+                        document.getElementById('unitKerjaTitle').textContent = value;
+
+                        // Open the modal
+                        // Add your code to open the modal here
+                    }
+                </script>
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="keterangan">Keterangan</label>
                                 <textarea class="form-control" id="keterangan" name="keterangan" rows="3" placeholder="Keterangan"></textarea>
                             </div>
                         </div>
-<!--                        <div class="text-center">-->
-<!--                            <button type="submit" class="btn btn-primary">Submit</button>-->
-<!--                            <button type="reset" class="btn btn-secondary">Reset</button>-->
-<!--                        </div>-->
+                        <br>
+                        <div class="mb-3">
+                            <label for="projectManager">Project Manager</label>
+                            <div>
+                            <select id="projectManager" name="projectManager" required>
+                            <option th:value=null>No Specific Customer Number</option>
+                            <option th:each="option : ${dropdownUnitKerja}"
+                                    th:value="${option.usrname}"
+                                    th:text="${option.usrname}"/>
+                            </select>
+
+                            </div>
+                        </div>
+
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -45,66 +64,6 @@
         </div>
     </div>
 
-
-
-<!--                    <h5 class="modal-title">Kantor Baru</h5>-->
-<!--                    <button type="button" class="btn-close" id="btnClose" data-bs-dismiss="modal"-->
-<!--                            aria-label="Close"></button>-->
-<!--                </div>-->
-<!--                <div class="modal-body">-->
-<!--                    <form class="row g-3">-->
-<!--                        <input type="hidden" id="cabangId" name="cabangId"/>-->
-<!--                        <div class="col-12">-->
-<!--                            <label for="namaCabang" class="form-label">Nama Kantor</label>-->
-<!--                            <input type="text" class="form-control" id="namaCabang" name="namaCabang"-->
-<!--                                   placeholder="Nama Kantor">-->
-<!--                        </div>-->
-<!--                        <div class="col-12">-->
-<!--                            <label for="nomorTelpCabang" class="form-label">Nomor Telepon-->
-<!--                            </label>-->
-<!--                            <input type="text" class="form-control" id="nomorTelpCabang" name="nomorTelpCabang"-->
-<!--                                   placeholder="Nomor Telepon">-->
-
-<!--                        </div>-->
-<!--                        <div class="col-12">-->
-<!--                            <label class="form-label">Jenis Kantor</label>-->
-
-<!--                            <div class="form-check">-->
-<!--                                <input class="form-check-input" type="radio"-->
-<!--                                       name="jenisKantor"-->
-<!--                                       value="Syariah"-->
-<!--                                       id="syariah">-->
-<!--                                <label class="form-check-label" for="syariah">-->
-<!--                                    Syariah-->
-<!--                                </label>-->
-<!--                            </div>-->
-<!--                            <div class="form-check">-->
-<!--                                <input class="form-check-input" type="radio"-->
-<!--                                       name="jenisKantor"-->
-<!--                                       value="Konven"-->
-<!--                                       id="konven" checked>-->
-<!--                                <label class="form-check-label" for="konven">-->
-<!--                                    Konven-->
-<!--                                </label>-->
-<!--                            </div>-->
-
-
-<!--                        </div>-->
-<!--                        <div class="col-12">-->
-<!--                            <div class="form-group">-->
-<!--                                <label for="alamat">Alamat</label>-->
-<!--                                <textarea class="form-control"-->
-<!--                                          id="alamat" name="alamat"-->
-<!--                                          rows="3" placeholder="Alamat"></textarea>-->
-<!--                            </div>-->
-<!--                        </div>-->
-
-<!--                    </form>&lt;!&ndash; Vertical Form &ndash;&gt;-->
-<!--                </div>-->
-<!--                <div class="modal-footer">-->
-<!--                    <button type="button" id="btnSave" class="btn btn-primary">SIMPAN</button>-->
-<!--                </div>-->
-<!--            </form>-->
         </div>
     </div>
 </div><!-- End Vertically centered Modal-->

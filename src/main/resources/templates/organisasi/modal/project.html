@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="modal fade" id="modalProject" tabindex="-1" th:fragment="modal"
+        aria-labelledby="modalProjectLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form id="formUpsertProject" method="post">
+            <div class="modal-header">
+                <h5 class="modal-title" id="projectTitle"><b>Ubah </b>Project</h5>
+                <button type="button" class="btn-close" id="btnClose" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="projectId" class="form-label">Kode/Nomor Project</label>
+                    <input type="text" class="form-control" id="projectId" name="projectId" th:placeholder="Kode" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="namaProject" class="form-label">Nama Project</label>
+                    <input type="text" class="form-control" id="namaProject" name="namaProject" placeholder="Nama Project">
+                </div>
+                <script defer>
+                        function openModal(value) {
+                        // Set the value in the modal
+                        document.getElementById('projectTitle').textContent = value;
+
+                        // Open the modal
+                        // Add your code to open the modal here
+                    }
+                </script>
+                <div class="row">
+                    <div class="col">
+                        <!--                        <label for="namaDepartemen" class="form-label">Departemen</label>-->
+                        <!--                        <input type="text" class="form-control" id="namaDepartemen" name="namaDepartemen" placeholder="Nama Departemen">-->
+
+                        <label for="namaDepartemen">Departemen</label>
+                        <div>
+                            <select id="namaDepartemen" name="namaDepartemen" required>
+                                <option th:value=null>No Specific Departemen</option>
+                                <option th:each="option : ${dropdownDepartemen}"
+                                        th:value="${option.departemenId}"
+                                        th:text="${option.namaDepartemen}"/>
+                            </select>
+
+                        </div>
+                    </div>
+                        <div class="col">
+                            <!--                        <label for="namaDepartemen" class="form-label">Departemen</label>-->
+                            <!--                        <input type="text" class="form-control" id="namaDepartemen" name="namaDepartemen" placeholder="Nama Departemen">-->
+
+                            <label for="projectOwner">Project Owner</label>
+                            <div>
+                                <select id="projectOwner" name="projectOwner" required>
+                                    <option th:value=null>No Specific Project Owner</option>
+                                    <option th:each="option : ${dropdownProjectOwner}"
+                                            th:value="${option.id}"
+                                            th:text="${option.usrname}"/>
+                                </select>
+
+                            </div>
+                        </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+<!--                                                <label for="projectManager" class="form-label">Project Manager</label>-->
+<!--                                                <input type="text" class="form-control" id="projectManager" name="projectManager" placeholder="Project Manager">-->
+
+                        <label for="projectManager">Project Manager</label>
+                        <div>
+                            <select id="projectManager" name="projectManager" required>
+                                <option th:value=null>No Specific Project Manager</option>
+                                <option th:each="option : ${dropdownProjectManager}"
+                                        th:value="${option.id}"
+                                        th:text="${option.usrname}"/>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col">
+<!--                        <label for="projectManager" class="form-label">Project Manager</label>-->
+<!--                        <input type="text" class="form-control" id="projectManager" name="projectManager" placeholder="Project Manager">-->
+
+                                                <label for="namaKantor">Kantor</label>
+                                                <div>
+                                                    <select id="namaKantor" name="namaKantor" required>
+                                                        <option th:value=null>No Specific Kantor</option>
+                                                        <option th:each="option : ${dropdownKantor}"
+                                                                th:value="${option.id}"
+                                                                th:text="${option.usrname}"/>
+                                                    </select>
+
+                                                </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="priority" >Priority</label>
+                        <div>
+                        <select id="priority" name="priority" required>
+                            <option th:value=null>No Specific Priority</option>
+                            <option th:value="1" th:text="Normal"></option>
+                            <option th:value="2" th:text="High"></option>
+                            <option th:value="3" th:text="Urgent"></option>
+                        </select>
+                        </div>
+                        </div>
+                    <div class="col">
+                        <label for="bobot">Bobot</label>
+                        <div>
+                            <select id="bobot" name="bobot">
+                                <option value="">Pilih angka</option>
+                                <option th:each="number : ${#numbers.sequence(1, 100)}"
+                                        th:value="${number}" th:text="${number}"></option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="status">Status</label>
+                        <div>
+                            <select id="status" name="status">
+                                <option th:value=null>No Specific Status</option>
+                                <option th:value="1" th:text="Setuju"></option>
+                                <option th:value="2" th:text="Draft"></option>
+                                <option th:value="3" th:text="Tolak"></option>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="tglMulai" class="form-label">Tanggal Mulai</label>
+                        <input type="date" class="form-control" id="tglMulai" name="tglMulai">
+                    </div>
+                    <div class="col">
+                        <label for="tglSelesai" class="form-label">Tanggal Selesai</label>
+                        <input type="date" class="form-control" id="tglSelesai" name="tglSelesai">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="form-label">Anggota</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="description">Deskripsi</label>
+                        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnSave" class="btn btn-primary">SIMPAN</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -7,10 +7,10 @@
         // add click event
         element.addEventListener('click', function () {
             // get value of data-id attribute
-            let id = this.getAttribute('data-id');
-            console.log(id);
+            let projectId = this.getAttribute('data-id');
+            console.log(projectId);
             // call getDataKantor function
-            getDataKantor(id);
+            getDataProject(projectId);
         });
     });
 
@@ -25,33 +25,32 @@
     btnSave.addEventListener('click', function (e) {
         // e.preventDefault();
         // call saveDataKantor function
-        saveDataKantor();
+        saveDataProject();
     });
 
-    let btnLogin = document.querySelector('#btnLogin');
-    // add click event
-    btnLogin.addEventListener('click', function (e) {
-        // e.preventDefault();
-        // call loginUser function
-        loginUser();
-    });
+//    let btnLogin = document.querySelector('#btnLogin');
+//    // add click event
+//    btnLogin.addEventListener('click', function (e) {
+//        // e.preventDefault();
+//        // call loginUser function
+//        loginUser();
+//    });
 
-    let modalKantor = document.querySelector('#modalKantor');
+    let modalProject = document.querySelector('#modalProject');
     // if modalKantor is hidden, reset the values
-    modalKantor.addEventListener('hidden.bs.modal', function () {
+    modalProject.addEventListener('hidden.bs.modal', function () {
         resetValues();
     });
-
 })();
 
-// ajax get data Cabang from controller kantor/{id}
+// ajax get data Cabang from controller kantor/{projectId}
 // where data cabang will be received as th:object in the edit kantor form
 
-function getDataKantor(id) {
+function getDataProject(projectId) {
     // get cabang data
-    $.get(`http://localhost:8080/kantor/kantor/${id}`).then(function (data) {
+    $.get(`http://localhost:8080/project/project/${projectId}`).then(function (data) {
         console.log(data);
-        $('#id').val(data.id);
+        $('#projectId').val(data.projectId);
         /*
         if (data.id != null) {
             var headingElement = document.getElementById('kantorTitle');
@@ -59,21 +58,29 @@ function getDataKantor(id) {
             console.log(data.id);
         }
         */
-        $('#ktrname').val(data.ktrname);
-        $('#ktrnohp').val(data.ktrnohp);
-        $('#ktradds').val(data.ktradds);
-        if (data.ktrjns == 'Konven') {
-            $('#konven').prop('checked', true);
-        } else if (data.ktrjns == 'Syariah') {
-            $('#syariah').prop('checked', true);
-        }
-        $('#modalKantor').modal('show');
+        $('#namaProject').val(data.namaProject);
+        $('#namaDepartemen').val(data.namaDepartemen);
+        $('#projectOwner').val(data.projectOwner);
+        $('#projectManager').val(data.projectManager);
+        $('#namaKantor').val(data.namaKantor);
+        $('#priority').val(data.priority);
+        $('#bobot').val(data.bobot);
+        $('#tglMulai').val(data.tglMulai);
+        $('#tglSelesai').val(data.tglSelesai);
+        $('#description').val(data.description);
+        $('#status').val(data.status);
+//        if (data.ktrjns == 'Konven') {
+//            $('#konven').prop('checked', true);
+//        } else if (data.ktrjns == 'Syariah') {
+//            $('#syariah').prop('checked', true);
+//        }
+//        $('#modalProject').modal('show');
     });
 }
 
-function saveDataKantor() {
-    let form = $('#formUpsertKantor');
-    let url = 'http://localhost:8080/kantor/kantor/upsert';
+function saveDataProject() {
+    let form = $('#formUpsertProject');
+    let url = 'http://localhost:8080/project/project/upsert';
     let method = form.attr('method');
     let data = form.serialize();
 
@@ -86,7 +93,7 @@ function saveDataKantor() {
         success: function (response) {
             // resetValidation();
             resetValues();
-            $('#modalKantor').modal('hide');
+            $('#modalProject').modal('hide');
             reloadTable();
         },
         error: function (response) {
@@ -136,12 +143,20 @@ function loginUser() {
 }
 
 function resetValues() {
-    $('#id').val('');
-    $('#ktrname').val('');
-    $('#ktrnohp').val('');
-    $('#ktradds').val('');
-    $('#konven').prop('checked', false);
-    $('#syariah').prop('checked', false);
+    $('#projectId').val('');
+    $('#namaProject').val('');
+    $('#namaDepartemen').val('');
+    $('#projectOwner').val('');
+    $('#projectManager').val('');
+    $('#namaKantor').val('');
+    $('#priority').val('');
+    $('#bobot').val('');
+    $('#tglMulai').val('');
+    $('#tglSelesai').val('');
+    $('#description').val('');
+    $('#status').val('');
+//    $('#konven').prop('checked', false);
+//    $('#syariah').prop('checked', false);
 }
 
 function reloadTable() {

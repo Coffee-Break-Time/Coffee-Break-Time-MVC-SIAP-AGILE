@@ -1,9 +1,6 @@
 package com.project.siapagile.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import javax.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;

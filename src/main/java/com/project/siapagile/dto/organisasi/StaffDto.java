@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DepartemenDto {
+public class StaffDto {
 
-    private Integer departemenId;
-    private String namaDepartemen;
-    private String keterangan;
-    private String projectManager;
+    public String namaStaff;
+    public String email1;
+    public String namaDepartemenStaff;
+    public String nomorTlp1;
 
 }

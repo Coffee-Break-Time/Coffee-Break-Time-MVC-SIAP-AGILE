@@ -3,9 +3,11 @@
 <head>
     <meta th:replace="~{fragments/main-layout.html :: head/meta}"/>
     <title th:replace="~{fragments/main-layout.html :: head/title}"></title>
-    <script th:src="@{/js/functionDetail.js}" defer></script>
+<!--    <script th:src="@{/js/functionDetail.js}" defer></script>-->
     <th:block th:replace="~{fragments/main-layout.html :: head/link}"/>
     <th:block th:replace="~{fragments/main-layout.html :: head/script}"/>
+    <script th:src="@{/vendor/apexcharts/apexcharts.min.js}" defer></script>
+    <script type="text/javascript" th:src="@{/js/getData/getDataProject.js}" defer></script>
 
 
 </head>
@@ -20,9 +22,15 @@
 <!-- main content-->
 <main id="main" class="main">
     <!--breadcrumb-->
-    <div th:replace="~{fragments/main-layout.html :: breadcrumb (${title})}"></div>
-
-    <!--content-->
+    <!--breadcrumb-->
+    <div th:fragment="breadcrumb" class="pagetitle">
+        <nav class="d-flex justify-content-end">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Project</a></li>
+                <li class="breadcrumb-item active">Home</li>
+            </ol>
+        </nav>
+    </div>    <!--content-->
     <section class="section dashboard">
         <div class="row">
             <div class="col-xxl-4 col-xl-12">
@@ -34,84 +42,10 @@
                             <h5 class="card-title">Daftar Project</h5>
                             <div class="edit-delete">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#verticalycentered">
+                                        data-bs-target="#modalProject" onclick="openModal('Project Baru')">
                                     <i class="bi bi-file-plus"></i>
                                 </button>
-                                <div class="modal fade" id="verticalycentered" tabindex="-1">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title"><b>Ubah </b>Project</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-<!--                                                <div class="mb-3">-->
-<!--                                                    <label for="formGroupExampleInput" class="form-label">Kode/Nomor Project</label>-->
-<!--                                                    <input type="text" class="form-control" id="formGroupExampleInput" th:placeholder="${data.projectId}">-->
-<!--                                                </div>-->
-                                                <div class="mb-3">
-                                                    <label class="form-label">Nama Project</label>
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label class="form-label">Departemen</label>
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                    <div class="col">
-                                                        <label class="form-label">Project Owner</label>
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label class="form-label">Project Manager</label>
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                    <div class="col">
-                                                        <label class="form-label">Kantor</label>
-                                                        <input type="text" class="form-control" >
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label class="form-label">Priority</label>
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                    <div class="col">
-                                                        <label class="form-label">Bobot</label>
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label class="form-label">Tanggal Mulai</label>
-                                                        <input type="date" class="form-control">
-                                                    </div>
-                                                    <div class="col">
-                                                        <label class="form-label">Tanggal Selesai</label>
-                                                        <input type="date" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label class="form-label">Anggota</label>
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label >Deskripsi</label>
-                                                        <textarea class="form-control" rows="3"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary">SIMPAN</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div th:replace="~{${modal} :: modal }"></div>
                                 <!-- refresh button -->
                                 <button onclick="window.location.reload();" type="button" class="btn btn-primary">
                                     <i class="bi bi-arrow-clockwise"></i>
@@ -162,91 +96,94 @@
 <!--                                        <i class="bi bi-pencil-square"></i>-->
 <!--                                    </button>-->
 
-                                    <button type="button" class="btn btn-primary detailBtn" data-bs-toggle="modal"
-                                            data-bs-target="#largeModal" th:data-id="${data.projectId}" th:data-nama="${data.namaProject}" th:data-departemen="${data.namaDepartemen}" th:data-project-owner="${data.projectOwner}" th:data-project-manager="${data.projectManager}" th:data-nama-kantor="${data.namaKantor}" th:data-priority="${data.priority}" th:data-bobot="${data.bobot}"
-                                            th:data-tanggal-mulai="${data.tglMulai}" th:data-tanggal-selesai="${data.tglSelesai}" th:data-anggota="${data.anggota}" th:data-status="${data.status}" onclick="openModal(this)">
+                                    <a type="button" class="btn btn-primary detailBtn" data-bs-toggle="modal"
+                                            data-bs-target="#modalProject"
+                                            th:data-id="${data.projectId}"
+                                            href="javascript:;"
+                                            id="buttonEdit"
+                                            onclick="openModal('Update Project')">
                                         <i class="bi bi-pencil-square"></i>
-                                    </button>
+                                    </a>
 
-                                    <div class="modal fade" id="largeModal" tabindex="-1">
-                                        <div class="modal-dialog modal-lg">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title"><b>Ubah </b>Project</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="mb-3">
-                                                        <label for="formGroupExampleInput" class="form-label">Kode/Nomor Project</label>
-                                                        <input type="text" class="form-control" id="formGroupExampleInput" th:placeholder="${data.projectId}">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="formGroupExampleInputNama" class="form-label">Nama Project</label>
-                                                        <input type="text" class="form-control" id="formGroupExampleInputNama" th:value="${data.namaProject}">
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <label for="formGroupExampleInputDepartemen" class="form-label">Departemen</label>
-                                                            <input type="text" class="form-control" id="formGroupExampleInputDepartemen" th:value="${data.namaDepartemen}">
-                                                        </div>
-                                                        <div class="col">
-                                                            <label for="formGroupExampleInputProjectOwner" class="form-label">Project Owner</label>
-                                                            <input type="text" class="form-control" id="formGroupExampleInputProjectOwner" th:value="${data.projectOwner}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <label for="formGroupExampleInputProjectManager" class="form-label">Project Manager</label>
-                                                            <input type="text" class="form-control" id="formGroupExampleInputProjectManager" th:value="${data.projectManager}">
-                                                        </div>
-                                                        <div class="col">
-                                                            <label for="formGroupExampleInputNamaKantor" class="form-label">Kantor</label>
-                                                            <input type="text" class="form-control" id="formGroupExampleInputNamaKantor" th:value="${data.namaKantor}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <label for="formGroupExampleInputPriority" class="form-label">Priority</label>
-                                                            <input type="text" class="form-control" id="formGroupExampleInputPriority" th:value="${data.priority}">
-                                                        </div>
-                                                        <div class="col">
-                                                            <label for="formGroupExampleInputBobot" class="form-label">Bobot</label>
-                                                            <input type="text" class="form-control" id="formGroupExampleInputBobot" th:value="${data.bobot}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <label for="formGroupExampleInputTanggalMulai" class="form-label">Tanggal Mulai</label>
-                                                            <input type="date" class="form-control" id="formGroupExampleInputTanggalMulai" th:value="${data.tglMulai}">
-                                                        </div>
-                                                        <div class="col">
-                                                            <label for="formGroupExampleInputTanggalSelesai" class="form-label">Tanggal Selesai</label>
-                                                            <input type="date" class="form-control" id="formGroupExampleInputTanggalSelesai" th:value="${data.tglSelesai}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <label for="formGroupExampleInputAnggota" class="form-label">Anggota</label>
-                                                            <input type="text" class="form-control" id="formGroupExampleInputAnggota" th:value="${data.anggota}">
-                                                        </div>
-                                                        <div class="col">
-                                                            <label for="formGroupExampleInputStatus" class="form-label">Status</label>
-                                                            <input type="text" class="form-control" id="formGroupExampleInputStatus" th:value="${data.status}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label for="exampleFormControlTextarea1">Deskripsi</label>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-primary">SIMPAN</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+<!--                                    <div class="modal fade" id="largeModal" tabindex="-1">-->
+<!--                                        <div class="modal-dialog modal-lg">-->
+<!--                                            <div class="modal-content">-->
+<!--                                                <div class="modal-header">-->
+<!--                                                    <h5 class="modal-title"><b>Ubah </b>Project</h5>-->
+<!--                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                                                </div>-->
+<!--                                                <div class="modal-body">-->
+<!--                                                    <div class="mb-3">-->
+<!--                                                        <label for="formGroupExampleInput" class="form-label">Kode/Nomor Project</label>-->
+<!--                                                        <input type="text" class="form-control" id="formGroupExampleInput" th:placeholder="${data.projectId}" readonly>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="mb-3">-->
+<!--                                                        <label for="formGroupExampleInputNama" class="form-label">Nama Project</label>-->
+<!--                                                        <input type="text" class="form-control" id="formGroupExampleInputNama" th:value="${data.namaProject}">-->
+<!--                                                    </div>-->
+<!--                                                    <div class="row">-->
+<!--                                                        <div class="col">-->
+<!--                                                            <label for="formGroupExampleInputDepartemen" class="form-label">Departemen</label>-->
+<!--                                                            <input type="text" class="form-control" id="formGroupExampleInputDepartemen" th:value="${data.namaDepartemen}">-->
+<!--                                                        </div>-->
+<!--                                                        <div class="col">-->
+<!--                                                            <label for="formGroupExampleInputProjectOwner" class="form-label">Project Owner</label>-->
+<!--                                                            <input type="text" class="form-control" id="formGroupExampleInputProjectOwner" th:value="${data.projectOwner}">-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="row">-->
+<!--                                                        <div class="col">-->
+<!--                                                            <label for="formGroupExampleInputProjectManager" class="form-label">Project Manager</label>-->
+<!--                                                            <input type="text" class="form-control" id="formGroupExampleInputProjectManager" th:value="${data.projectManager}">-->
+<!--                                                        </div>-->
+<!--                                                        <div class="col">-->
+<!--                                                            <label for="formGroupExampleInputNamaKantor" class="form-label">Kantor</label>-->
+<!--                                                            <input type="text" class="form-control" id="formGroupExampleInputNamaKantor" th:value="${data.namaKantor}">-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="row">-->
+<!--                                                        <div class="col">-->
+<!--                                                            <label for="formGroupExampleInputPriority" class="form-label">Priority</label>-->
+<!--                                                            <input type="text" class="form-control" id="formGroupExampleInputPriority" th:value="${data.priority}">-->
+<!--                                                        </div>-->
+<!--                                                        <div class="col">-->
+<!--                                                            <label for="formGroupExampleInputBobot" class="form-label">Bobot</label>-->
+<!--                                                            <input type="text" class="form-control" id="formGroupExampleInputBobot" th:value="${data.bobot}">-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="row">-->
+<!--                                                        <div class="col">-->
+<!--                                                            <label for="formGroupExampleInputTanggalMulai" class="form-label">Tanggal Mulai</label>-->
+<!--                                                            <input type="date" class="form-control" id="formGroupExampleInputTanggalMulai" th:value="${data.tglMulai}">-->
+<!--                                                        </div>-->
+<!--                                                        <div class="col">-->
+<!--                                                            <label for="formGroupExampleInputTanggalSelesai" class="form-label">Tanggal Selesai</label>-->
+<!--                                                            <input type="date" class="form-control" id="formGroupExampleInputTanggalSelesai" th:value="${data.tglSelesai}">-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="row">-->
+<!--                                                        <div class="col">-->
+<!--                                                            <label for="formGroupExampleInputAnggota" class="form-label">Anggota</label>-->
+<!--                                                            <input type="text" class="form-control" id="formGroupExampleInputAnggota" th:value="${data.anggota}">-->
+<!--                                                        </div>-->
+<!--                                                        <div class="col">-->
+<!--                                                            <label for="formGroupExampleInputStatus" class="form-label">Status</label>-->
+<!--                                                            <input type="text" class="form-control" id="formGroupExampleInputStatus" th:value="${data.status}">-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="col-12">-->
+<!--                                                        <div class="form-group">-->
+<!--                                                            <label for="exampleFormControlTextarea1">Deskripsi</label>-->
+<!--                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="modal-footer">-->
+<!--                                                    <button type="button" class="btn btn-primary">SIMPAN</button>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal123"
@@ -303,89 +240,6 @@
         </div>
     </section>
 </main>
-
-<script>
-    // Menambahkan event listener untuk radio button
-    var radioButtons = document.getElementsByName('status');
-    for (var i = 0; i < radioButtons.length; i++) {
-        radioButtons[i].addEventListener('change', filterData);
-    }
-
-    // Fungsi untuk memfilter data berdasarkan kategori
-    function filterData() {
-        var status = document.querySelector('input[name="status"]:checked').value;
-        var table = document.querySelector('table');
-        var rows = table.getElementsByTagName('tr');
-        for (var i = 1; i < rows.length; i++) {
-            var cells = rows[i].getElementsByTagName('td');
-            if (status == 'semua' || cells[4].textContent.trim() == status || (status == 'ajuan' && cells[4].textContent.trim() == 'Ajuan' || (status == 'draft' && cells[4].textContent.trim() == 'Draft' || (status == 'disetujui' && cells[4].textContent.trim() == 'Disetujui' || (status == 'ditolak' && cells[4].textContent.trim() == 'Ditolak' || (status == 'nonaktif' && cells[4].textContent.trim() == 'Nonaktif')))))) {
-                rows[i].style.display = '';
-            } else {
-                rows[i].style.display = 'none';
-            }
-        }
-    }
-</script>
-
-<script>
-function openModal(button) {
-  var projectId = button.getAttribute("data-id");
-  var namaProject = button.getAttribute("data-nama");
-  var namaDepartemen = button.getAttribute("data-departemen");
-  var projectOwner = button.getAttribute("data-project-owner");
-  var projectManager = button.getAttribute("data-project-manager");
-  var namaKantor = button.getAttribute("data-nama-kantor");
-  var priority = button.getAttribute("data-priority");
-  var bobot = button.getAttribute("data-bobot");
-  var tanggalMulai = button.getAttribute("data-tanggal-mulai");
-    var tanggalSelesai = button.getAttribute("data-tanggal-selesai");
-    var anggota = button.getAttribute("data-anggota");
-    var status = button.getAttribute("data-status");
-
-
-  var inputField = document.getElementById("formGroupExampleInput");
-  var inputFieldNama = document.getElementById("formGroupExampleInputNama");
-  var inputFieldDepartemen = document.getElementById("formGroupExampleInputDepartemen");
-    var inputFieldProjectOwner = document.getElementById("formGroupExampleInputProjectOwner");
-    var inputFieldProjectManager = document.getElementById("formGroupExampleInputProjectManager");
-    var inputFieldKantor = document.getElementById("formGroupExampleInputNamaKantor");
-    var inputFieldPriority = document.getElementById("formGroupExampleInputPriority");
-    var inputFieldBobot = document.getElementById("formGroupExampleInputBobot");
-    var inputFieldTanggalMulai = document.getElementById("formGroupExampleInputTanggalMulai");
-    var inputFieldTanggalSelesai = document.getElementById("formGroupExampleInputTanggalSelesai");
-    var inputFieldAnggota = document.getElementById("formGroupExampleInputAnggota");
-    var inputFieldStatus = document.getElementById("formGroupExampleInputStatus");
-
-
-  inputField.value = projectId;
-    inputFieldDepartemen.value = namaDepartemen;
-  inputFieldNama.value = namaProject;
-    inputFieldProjectOwner.value = projectOwner;
-    inputFieldProjectManager.value = projectManager;
-    inputFieldKantor.value = namaKantor;
-    inputFieldPriority.value = priority;
-    inputFieldBobot.value = bobot;
-    inputFieldTanggalMulai.value = tanggalMulai;
-    inputFieldTanggalSelesai.value = tanggalSelesai;
-    inputFieldAnggota.value = anggota;
-    inputFieldStatus.value = status;
-}
-
-</script>
-
-<script>
-    const links = document.querySelectorAll('.popup-link');
-
-    links.forEach(link => {
-        link.addEventListener('mouseover', () => {
-            link.nextElementSibling.style.display = 'block';
-        });
-
-        link.addEventListener('mouseout', () => {
-            link.nextElementSibling.style.display = 'none';
-        });
-    });
-</script>
 
 </body>
 </html>
